@@ -2,6 +2,7 @@
 
 use App\Enums\UserRoles;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,14 @@ Route::prefix('admin')
             Route::get('/{category}', [CategoryController::class, 'getCategory']);
             Route::post('/store', [CategoryController::class, 'addCategory']);
             Route::post('/update', [CategoryController::class, 'updateCategory'])->name('category.update');
-            Route::delete('/delete/{department}', [CategoryController::class, 'destroyDepartment'])->name('department.destroy');
+        });
+
+        // Brands
+        Route::prefix('brand')->group(function () {
+            Route::get('/', [BrandController::class, 'getAllBrands'])->name('brands.list');
+            Route::get('/{brand}', [BrandController::class, 'getBrand']);
+            Route::post('/store', [BrandController::class, 'addBrand']);
+            Route::post('/update', [BrandController::class, 'updateBrand'])->name('brand.update');
         });
 
     });
