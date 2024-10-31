@@ -2,6 +2,7 @@
 
 use App\Enums\UserRoles;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,12 +14,23 @@ Route::get('/', function () {
 Route::prefix('admin')
     ->middleware([
         'auth',
-        'role:'.UserRoles::ADMIN.'',
+        'role:'.UserRoles::ADMIN->value.'',
         config('jetstream.auth_session'),
         'verified'])
     ->group(function () {
 
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+        // Categories
+        Route::prefix('categories')->group(function () {
+            Route::get('/', [CategoryController::class, 'getAllCategories'])->name('categoryList.list');
+            Route::get('/sub-categories', [CategoryController::class, 'getAllSubCategories'])->name('categoryList.list');
+            Route::get('/{category}', [CategoryController::class, 'getCategory']);
+            Route::post('/store', [CategoryController::class, 'addCategory']);
+            Route::post('/update', [CategoryController::class, 'updateCategory'])->name('category.update');
+            Route::delete('/delete/{department}', [CategoryController::class, 'destroyDepartment'])->name('department.destroy');
+        });
+
     });
 
 Route::middleware([
@@ -40,5 +52,5 @@ Route::get('/logout', function () {
     return redirect('/');
 })->name('logout');
 
-include_once 'student.php';
-include_once 'teacher.php';
+include_once 'customer.php';
+include_once 'vendor.php';

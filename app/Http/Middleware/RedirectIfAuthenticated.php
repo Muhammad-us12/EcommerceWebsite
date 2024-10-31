@@ -19,12 +19,12 @@ class RedirectIfAuthenticated
     {
         $user = Auth::user();
 
-        if ($user->role == UserRoles::ADMIN) {
+        if ($user->role == UserRoles::ADMIN->value) {
             return redirect()->route('admin.dashboard');
-        } elseif ($user->role == UserRoles::TEACHER) {
-            return redirect()->route('teacher.dashboard');
-        } elseif ($user->role == UserRoles::STUDENT) {
-            return redirect()->route('student.dashboard');
+        } elseif ($user->role == UserRoles::VENDOR->value) {
+            return redirect()->route('vendor.dashboard');
+        } elseif ($user->role == UserRoles::CUSTOMER->value) {
+            return redirect()->route('customer.dashboard');
         }
 
         return $next($request);

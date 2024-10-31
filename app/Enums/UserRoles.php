@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum UserRoles: string
 {
-    const ADMIN = 'admin';
+    case ADMIN = 'admin';
 
-    const TEACHER = 'teacher';
+    case VENDOR = 'vendor';
 
-    const STUDENT = 'student';
+    case CUSTOMER = 'customer';
 }
