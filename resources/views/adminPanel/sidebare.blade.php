@@ -40,4 +40,18 @@
     </div>
 </li>
 
+<li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#ProductAttribute" aria-expanded="false" aria-controls="ProductAttribute" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Product Attribute </span>
+    </a>
+    <div class="collapse" id="ProductAttribute">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/product-attribute') }}">Product Attribute</a>
+            </li>
+        </ul>
+    </div>
+</li>
                     

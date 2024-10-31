@@ -41,7 +41,7 @@
                     <!--    <img src="{{ asset('adminPanel/assets/images/logo.png') }}" alt="" style="width:180px;">-->
                     <!--</span>-->
                     
-                    The Choice Marketing
+                    Ecommerce Website
                     <span class="logo-sm">
                         <img src="{{ asset('adminPanel/assets/images/logo_sm.png') }}" alt="" height="16">
                     </span>

@@ -4,6 +4,7 @@ use App\Enums\UserRoles;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductAttributeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,14 @@ Route::prefix('admin')
             Route::get('/{brand}', [BrandController::class, 'getBrand']);
             Route::post('/store', [BrandController::class, 'addBrand']);
             Route::post('/update', [BrandController::class, 'updateBrand'])->name('brand.update');
+        });
+
+        // Product Attribute
+        Route::prefix('product-attribute')->group(function () {
+            Route::get('/', [ProductAttributeController::class, 'getAllProductAttributes'])->name('productAttributes.list');
+            Route::get('/{productAttribute}', [ProductAttributeController::class, 'getProductAttribute']);
+            Route::post('/store', [ProductAttributeController::class, 'addProductAttribute']);
+            Route::post('/update', [ProductAttributeController::class, 'updateProductAttribute'])->name('productAttributes.update');
         });
 
     });

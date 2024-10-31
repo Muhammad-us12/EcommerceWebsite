@@ -49,7 +49,6 @@ class BrandController extends Controller
         $request->validate([
             'brandId' => ['required', 'exists:brands,id'],
             'name' => ['required', 'string', 'unique:brands,name'],
-            'parent_id' => ['nullable', 'integer', 'exists:brands,id'],
         ]);
 
         $Brand = Brand::find($request->brandId)->update([
