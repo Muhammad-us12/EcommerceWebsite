@@ -1,9 +1,9 @@
 
-@extends('adminPanel/master') 
+@extends('vendorPanel/master') 
 
         @section('sidebare')
 
-        @include('adminPanel/sidebare')
+        @include('vendorPanel/sidebare')
 
         @endsection
          @section('content')        

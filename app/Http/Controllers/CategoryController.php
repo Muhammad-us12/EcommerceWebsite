@@ -23,6 +23,18 @@ class CategoryController extends Controller
         return view('adminPanel.categories.subCategories', ['subCategories' => $subCategories, 'categories' => $categories]);
     }
 
+    public function fetchSubCategory(Category $category)
+    {
+        $subCategories = Category::where('parent_id', $category->id)->get();
+
+        return response()->json([
+            'error' => false,
+            'data' => [
+                'subCategories' => $subCategories,
+            ],
+        ]);
+    }
+
     public function getCategory(Category $category)
     {
 

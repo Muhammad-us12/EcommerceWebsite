@@ -8,6 +8,21 @@
 </li>
 
 <li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#sliderNav" aria-expanded="false" aria-controls="sliderNav" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <span class="badge bg-success float-end">4</span>
+        <span> Sliders </span>
+    </a>
+    <div class="collapse" id="sliderNav">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/sliders') }}">Sliders List</a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+<li class="side-nav-item">
     <a data-bs-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category" class="side-nav-link">
         <i class="uil-home-alt"></i>
         <!-- <span class="badge bg-success float-end">4</span> -->
@@ -54,4 +69,18 @@
         </ul>
     </div>
 </li>
-                    
+          
+<li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#Product" aria-expanded="false" aria-controls="Product" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Product</span>
+    </a>
+    <div class="collapse" id="Product">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/product') }}">Product</a>
+            </li>
+        </ul>
+    </div>
+</li>
