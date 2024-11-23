@@ -67,7 +67,6 @@ Route::prefix('admin')
             Route::post('/store', [ProductController::class, 'store']);
             Route::post('/update', [ProductController::class, 'update']);
             Route::post('/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
-
         });
 
     });

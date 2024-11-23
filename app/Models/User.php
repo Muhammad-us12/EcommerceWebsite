@@ -66,4 +66,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * @return HasOne<Vendor>
+     */
+    public function vendor()
+    {
+        return $this->hasOne(Vendor::class);
+    }
 }
