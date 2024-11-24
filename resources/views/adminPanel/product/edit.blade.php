@@ -49,59 +49,162 @@
                         </div>
                         <div class="col-sm-7">
                             <div class="text-sm-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#standard-modal">Add New</button>
+                                <a href="{{ URL::to('admin/product') }}" class="btn btn-primary">Add New</a>
                             </div>
                         </div><!-- end col-->
                     </div>
+                    <form action="{{ URL::to('/admin/product/update/'.$product->id) }}" enctype="multipart/form-data" method="post">
+                    @csrf
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Select Vendor</label>
+                                    <select class="form-select" name="user_id" id="example-select">
+                                        <option value="">Not a Vendor Product</option>
+                                        @foreach($vendors as $vendor)
+                                        <option @if($product->user_id == $vendor->id) selected @endif value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_id')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
 
-                    <div class="table-responsive">
-                        <table id="scroll-horizontal-datatable" class="table table-centered w-100 nowrap">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Cost Price</th>
-                                    <th>Security Deposit</th>
-                                    <th>Rent</th>
-                                    <th>Quantity</th>
-                                    <th>Vendor</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($products as $product)
-                                <tr>
-                                    <td><img src="{{ $product->getFirstMediaUrl('image') }}" style="width: 100px" alt=""></td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>
-                                        <h6>Category: {{ $product->category->name }}</h6>
-                                        <h6>Sub Category: {{ $product->subCategory->name }}</h6>
-                                        <h6>Brand: {{ $product->brand->name }}</h6>
-                                    </td>
-                                    <td>{{ $product->cost_price }}</td>
-                                    <td>{{ $product->security_deposit }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->quantity }}</td>
-                                    <td>{{ $product->vendor->name }}</td>
-                                    <td>{{ $product->status }}</td>
-                                    <td>
-                                    <a href="{{ URL::to('admin/product/'.$product->id.'/gallery') }}" class="btn btn-success">Gallery</a>
-                                    <a href="{{ URL::to('admin/product/'.$product->id) }}" class="btn btn-info">View</a>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Name</label>
+                                    <input type="text" id="name" name="name" value="{{ $product->name }}" required class="form-control">
+                                    @error('name')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Cost Price</label>
+                                    <input type="number" step="any" id="cost_price" value="{{ $product->cost_price }}" name="cost_price" required class="form-control">
+                                    @error('cost_price')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Rent Price</label>
+                                    <input type="number" step="any" id="price" value="{{ $product->price }}" name="price" required class="form-control">
+                                    @error('price')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                           
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Select Brand</label>
+                                    <select class="form-select" name="brand_id" required id="example-select">
+                                        @foreach($brands as $brand)
+                                        <option @if($product->brand_id == $brand->id) selected @endif value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('brand_id')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Qty</label>
+                                    <input type="number" value="{{ $product->quantity }}" step="any" id="quantity" name="quantity" required class="form-control">
+                                    @error('quantity')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Security Deposit</label>
+                                    <input type="number" value="{{ $product->security_deposit }}" step="any" id="security_deposit" name="security_deposit" required class="form-control">
+                                    @error('security_deposit')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Select Category</label>
+                                    <select class="form-select" name="category_id" required onchange="fetchSubCategory()" id="category_id">
+                                        @foreach($categories as $category)
+                                        <option @if($product->category_id == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Sub Category</label>
+                                    <select class="form-select" name="subcategory_id" required id="sub_category_id">
+                                    @foreach($subCategories as $subCategory)
+                                        <option @if($product->subcategory_id == $subCategory->id) selected @endif value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                        @endforeach
                                     
-                                        <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="display:inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                    </select>
+                                    @error('subcategory_id')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
 
-                            </table>
-                            {{ $products->links() }}
-                    </div>
+                            <div class="col-sm-10">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Picture</label>
+                                    <input type="file" step="any" value="{{ $product->thumbnail }}" id="thumbnail" name="thumbnail" class="form-control">
+                                    @error('thumbnail')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="mb-3">
+                                    <img src="{{ $product->getFirstMediaUrl('image') }}" style="width: 100px" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" id="">{{ $product->description }}</textarea>
+                                </div>
+                                <h4>Product Details</h4>
+                            </div>
+
+                            @foreach($productAttributes as $productAttribute)
+                             
+                                    <div class="col-sm-2">
+                                        <div class="mb-3">
+                                            <label for="example-input-normal" class="form-label">{{ $productAttribute->name }}</label>
+                                            <input type="text" name="attributes[]" value="{{ $productAttribute->getProductAttributeValue($product->id)?->value }}" class="form-control">
+                                            <input type="text" name="attributesId[]" hidden value="{{ $productAttribute->id }}" class="form-control">
+                                  
+                                        </div>
+                                    </div>
+                                   
+                            @endforeach
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                            </div>
+                          
+                        </div>
+                    </form>
+
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -119,139 +222,7 @@
                     @csrf
                     <div class="modal-body">
 
-                        <div class="row mb-2">
-                            <div class="col-sm-12">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Select Vendor</label>
-                                    <select class="form-select" name="user_id" required id="example-select">
-                                        <option value="">Not a Vendor Product</option>
-                                        @foreach($vendors as $vendor)
-                                        <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_id')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Name</label>
-                                    <input type="text" id="name" name="name" required class="form-control">
-                                    @error('name')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Cost Price</label>
-                                    <input type="number" step="any" id="cost_price" name="cost_price" required class="form-control">
-                                    @error('cost_price')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Rent Price</label>
-                                    <input type="number" step="any" id="price" name="price" required class="form-control">
-                                    @error('price')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                           
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Select Brand</label>
-                                    <select class="form-select" name="brand_id" required id="example-select">
-                                        @foreach($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('brand_id')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Qty</label>
-                                    <input type="number" step="any" id="quantity" name="quantity" required class="form-control">
-                                    @error('quantity')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Security Deposit</label>
-                                    <input type="number" step="any" id="security_deposit" name="security_deposit" required class="form-control">
-                                    @error('security_deposit')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Select Category</label>
-                                    <select class="form-select" name="category_id" required onchange="fetchSubCategory()" id="category_id">
-                                        @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Sub Category</label>
-                                    <select class="form-select" name="subcategory_id" required id="sub_category_id">
-                                        
-                                    </select>
-                                    @error('subcategory_id')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Picture</label>
-                                    <input type="file" step="any" id="thumbnail" name="thumbnail" required class="form-control">
-                                    @error('thumbnail')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Description</label>
-                                    <textarea name="description" class="form-control" id=""></textarea>
-                                </div>
-                                <h4>Product Details</h4>
-                            </div>
-
-                            @foreach($productAttributes as $productAttribute)
-                                    <div class="col-sm-2">
-                                        <div class="mb-3">
-                                            <label for="example-input-normal" class="form-label">{{ $productAttribute->name }}</label>
-                                            <input type="text" name="attributes[]" class="form-control">
-                                            <input type="text" name="attributesId[]" hidden value="{{ $productAttribute->id }}" class="form-control">
-                                  
-                                        </div>
-                                    </div>
-                                   
-                            @endforeach
-                          
-                        </div>
-
+                    
 
                 
 

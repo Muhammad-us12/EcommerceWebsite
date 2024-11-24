@@ -61,11 +61,12 @@ Route::prefix('admin')
         // Product
         Route::prefix('product')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('product.index');
-            Route::get('/{product}', [ProductController::class, 'show']);
+            Route::get('/{product}', [ProductController::class, 'edit']);
             Route::get('/{product}/gallery', [ProductController::class, 'getGallery']);
+            Route::get('/gallery/{media}/delete', [ProductController::class, 'deleteGalleryImage']);
             Route::post('/{product}/gallery', [ProductController::class, 'saveProductGallery']);
             Route::post('/store', [ProductController::class, 'store']);
-            Route::post('/update', [ProductController::class, 'update']);
+            Route::post('/update/{product}', [ProductController::class, 'update']);
             Route::post('/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
         });
 

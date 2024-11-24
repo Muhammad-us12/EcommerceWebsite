@@ -97,7 +97,6 @@ class ProductControllerTest extends TestCase
         $product = Product::factory()->create();
 
         $payload = [
-            'product_id' => $product->id,
             'name' => fake()->name(),
             'description' => fake()->text(),
             'category_id' => $category->id,
@@ -108,7 +107,7 @@ class ProductControllerTest extends TestCase
             'security_deposit' => fake()->numberBetween(100, 300),
         ];
 
-        $response = $this->actingAs($user)->post('/admin/product/update', $payload);
+        $response = $this->actingAs($user)->post('/admin/product/update/'.$product->id, $payload);
 
         $this->assertDatabaseHas('products', [
             'name' => $payload['name'],

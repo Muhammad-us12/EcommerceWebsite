@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateProduct;
+use App\Actions\UpdateProduct;
+use App\Enums\UserRoles;
+use App\Http\Requests\ProductUpdateValidation;
+use App\Http\Requests\ProductValidation;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductController extends Controller
 {
@@ -16,9 +23,10 @@ class ProductController extends Controller
         $products = Product::orderBy('id', 'desc')->paginate(10);
         $categories = Category::whereNull('parent_id')->get();
         $brands = Brand::all();
+        $vendors = User::where('role', UserRoles::VENDOR)->get();
         $productAttributes = ProductAttribute::all();
 
-        return view('adminPanel.product.index', compact('products', 'categories', 'brands', 'productAttributes'));
+        return view('adminPanel.product.index', compact('products', 'categories', 'brands', 'productAttributes', 'vendors'));
     }
 
     public function create()
@@ -26,34 +34,19 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(Request $request)
+    public function store(ProductValidation $request, CreateProduct $createProduct)
     {
-        $requestData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'category_id' => ['required', 'integer', 'exists:categories,id'],
-            'subcategory_id' => ['required', 'integer', 'exists:categories,id'],
-            'brand_id' => ['required', 'integer', 'exists:brands,id'],
-            'price' => ['required', 'numeric'],
-            'cost_price' => ['required', 'numeric'],
-            'quantity' => ['required', 'numeric'],
-            'security_deposit' => ['required', 'numeric'],
-            'vendor_id' => ['nullable', 'string', 'exists:user,id'],
-            'thumbnail' => ['required', 'mimes:jpeg,jpg,png,gif|max:10244'],
-            'attributes.*' => ['nullable'],
-            'attributesId.*' => ['nullable', 'exists:product_attributes,id'],
-        ]);
+        $validatedData = $request->validated();
+        if (! isset($validatedData['user_id'])) {
+            $validatedData['user_id'] = Auth::id();
+        }
 
-        $requestData['user_id'] = Auth::user()->id;
-
-        $product = Product::create($requestData);
-
-        $product->addMediaFromRequest('thumbnail')->toMediaCollection('image');
+        $product = $createProduct->execute($validatedData, $request);
 
         if ($product) {
-            return redirect()->back()->with(['success' => 'Product Added Successfully']);
+            return redirect()->back()->with('success', 'Product Added Successfully');
         } else {
-            return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
+            return redirect()->back()->with('error', 'Something Went Wrong Try Again');
         }
     }
 
@@ -78,38 +71,54 @@ class ProductController extends Controller
 
     public function getGallery(Product $product)
     {
-        $product->getMedia('gallery');
+        $productGalley = $product->getMedia('gallery');
+
+        return view('adminPanel.product.gallery', compact('productGalley', 'product'));
+    }
+
+    public function deleteGalleryImage(Media $media)
+    {
+        if ($media) {
+            $media->delete();
+
+            return redirect()->back()->with(['success' => 'Image Deleted Successfully']);
+        }
+
+        return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
+
     }
 
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        return view('product.edit', compact('product'));
     }
 
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::whereNull('parent_id')->get();
+        $subCategories = Category::where('parent_id', $product->category_id)->get();
+        $brands = Brand::all();
+        $productAttributes = ProductAttribute::all();
+        $vendors = User::where('role', UserRoles::VENDOR)->get();
+
+        return view('adminPanel.product.edit', compact('product', 'categories', 'subCategories', 'brands', 'productAttributes', 'vendors'));
     }
 
-    public function update(Request $request)
+    public function update(Product $product, ProductUpdateValidation $request, UpdateProduct $updateProduct)
     {
-        $request->validate([
-            'product_id' => ['required', 'integer', 'exists:products,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'category_id' => ['required', 'integer', 'exists:categories,id'],
-            'subcategory_id' => ['required', 'integer', 'exists:categories,id'],
-            'brand_id' => ['required', 'integer', 'exists:brands,id'],
-            'price' => ['required', 'numeric'],
-            'quantity' => ['required', 'numeric'],
-            'security_deposit' => ['required', 'numeric'],
-            'vendor_id' => ['nullable', 'string', 'exists:user,id'],
-        ]);
+        $validatedRequest = $request->validated();
 
-        $product = Product::find($request->product_id);
-        $product->update($request->all());
+        if (! isset($validatedRequest['user_id'])) {
+            $validatedRequest['user_id'] = Auth::id();
+        }
 
-        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
+        $updateProduct->execute($product, $validatedRequest, $request);
+
+        if ($product) {
+            return redirect()->back()->with(['success' => 'Product Updated Successfully']);
+        } else {
+            return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
+        }
     }
 
     public function destroy(Product $product)

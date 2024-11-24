@@ -14,4 +14,11 @@ class ProductAttribute extends Model
         'name',
         'user_id',
     ];
+
+    public function getProductAttributeValue(int $productId)
+    {
+        return ProductAssignedAttributes::where('product_id', $productId)
+            ->where('attribute_id', $this->id)
+            ->first();
+    }
 }
