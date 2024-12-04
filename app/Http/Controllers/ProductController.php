@@ -9,6 +9,7 @@ use App\Http\Requests\ProductUpdateValidation;
 use App\Http\Requests\ProductValidation;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ExtraPrices;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\User;
@@ -20,13 +21,22 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->paginate(10);
+        if (Auth::user()->role == UserRoles::ADMIN->value) {
+            $products = Product::orderBy('id', 'desc')->paginate(10);
+        } else {
+            $products = Product::where('user_id', Auth::user()->id)
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        }
+
         $categories = Category::whereNull('parent_id')->get();
         $brands = Brand::all();
         $vendors = User::where('role', UserRoles::VENDOR)->get();
         $productAttributes = ProductAttribute::all();
+        $extraPrices = ExtraPrices::all();
+        $role = Auth::user()->role;
 
-        return view('adminPanel.product.index', compact('products', 'categories', 'brands', 'productAttributes', 'vendors'));
+        return view('adminPanel.product.index', compact('products', 'categories', 'brands', 'productAttributes', 'vendors', 'role', 'extraPrices'));
     }
 
     public function create()

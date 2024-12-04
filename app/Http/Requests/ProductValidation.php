@@ -35,6 +35,11 @@ class ProductValidation extends FormRequest
             'thumbnail' => ['required', 'mimes:jpeg,jpg,png,gif|max:10244'],
             'attributes.*' => ['nullable'],
             'attributesId.*' => ['nullable', 'exists:product_attributes,id'],
+            'adjustable.*' => ['string', 'in:true,false'],
+            'min_value.*' => ['nullable', 'numeric'],
+            'max_value.*' => ['nullable', 'numeric'],
+            'price_ids.*' => ['nullable', 'exists:extra_prices,id'],
+            'price_values.*' => ['nullable', 'numeric'],
         ];
     }
 }

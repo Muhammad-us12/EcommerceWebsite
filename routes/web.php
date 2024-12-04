@@ -4,6 +4,8 @@ use App\Enums\UserRoles;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExtraPricesController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
@@ -11,7 +13,10 @@ use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+// Now make a checkout page for  take customer information about order  and create a  order save order details in order model and order lline items and customer information in seperate model and also wirte test for
+
 Route::get('/', [WebsiteController::class, 'index']);
+Route::get('/product-details/{product}', [WebsiteController::class, 'productDetails']);
 Route::get('/register-vendor', [WebsiteController::class, 'registerVendor']);
 
 // Routes for users with 'admin' role
@@ -42,6 +47,17 @@ Route::prefix('admin')
             Route::post('/update', [CategoryController::class, 'updateCategory'])->name('category.update');
         });
 
+        // Locations
+        Route::prefix('location')->group(function () {
+            Route::get('/', [LocationController::class, 'locationList'])->name('location.list');
+            Route::get('/{id}', [LocationController::class, 'getLocation']);
+            Route::post('/store', [LocationController::class, 'addLocation']);
+            Route::post('/update', [LocationController::class, 'updateLocation'])->name('location.update');
+            Route::get('/delete-check/{id}', [LocationController::class, 'deleteCheck']);
+            Route::delete('/delete/{id}', [LocationController::class, 'destroyLocation'])->name('location.destroy');
+
+        });
+
         // Brands
         Route::prefix('brand')->group(function () {
             Route::get('/', [BrandController::class, 'getAllBrands'])->name('brands.list');
@@ -56,6 +72,14 @@ Route::prefix('admin')
             Route::get('/{productAttribute}', [ProductAttributeController::class, 'getProductAttribute']);
             Route::post('/store', [ProductAttributeController::class, 'addProductAttribute']);
             Route::post('/update', [ProductAttributeController::class, 'updateProductAttribute'])->name('productAttributes.update');
+        });
+
+        // Extra Prices
+        Route::prefix('extra-price')->group(function () {
+            Route::get('/', [ExtraPricesController::class, 'getAllExtraPrices'])->name('extraPrices.list');
+            Route::get('/{extraPrice}', [ExtraPricesController::class, 'getExtraPrices']);
+            Route::post('/store', [ExtraPricesController::class, 'addExtraPrices']);
+            Route::post('/update', [ExtraPricesController::class, 'updateExtraPrices'])->name('extraPrices.update');
         });
 
         // Product

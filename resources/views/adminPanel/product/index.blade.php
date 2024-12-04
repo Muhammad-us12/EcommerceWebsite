@@ -6,7 +6,11 @@
 
         @section('sidebare')
 
-        @include('adminPanel/sidebare')
+        @if($role == 'admin')
+         @include('adminPanel/sidebare')
+         @else
+         @include('vendorPanel/sidebare')
+        @endif
 
         @endsection
          @section('content')   
@@ -16,6 +20,43 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
+        @if(session('success'))
+                                               
+
+                                               <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                   <div class="modal-dialog modal-sm">
+                                                       <div class="modal-content modal-filled bg-success">
+                                                           <div class="modal-body p-4">
+                                                               <div class="text-center">
+                                                                   <i class="dripicons-checkmark h1"></i>
+                                                                   <h4 class="mt-2">Well Done!</h4>
+                                                                   <p class="mt-3">{{ session('success') }}</p>
+                                                                   <button type="button" class="btn btn-light my-2" data-bs-dismiss="modal">Continue</button>
+                                                               </div>
+                                                           </div>
+                                                       </div><!-- /.modal-content -->
+                                                   </div><!-- /.modal-dialog -->
+                                               </div>
+
+                                               
+                                               @endif
+
+                                               @if(session('error'))
+                                               <div id="error-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                   <div class="modal-dialog modal-sm">
+                                                       <div class="modal-content modal-filled bg-danger">
+                                                           <div class="modal-body p-4">
+                                                               <div class="text-center">
+                                                                   <i class="dripicons-wrong h1"></i>
+                                                                   <h4 class="mt-2">Oh snap!</h4>
+                                                                   <p class="mt-3">{{ session('error') }}</p>
+                                                                   <button type="button" class="btn btn-light my-2" data-bs-dismiss="modal">Continue</button>
+                                                               </div>
+                                                           </div>
+                                                       </div><!-- /.modal-content -->
+                                                   </div><!-- /.modal-dialog -->
+                                               </div><!-- /.modal -->
+                                               @endif
             <div class="page-title-box">
                 <div class="page-title-right">
                     <form class="d-flex">
@@ -37,6 +78,21 @@
             </div>
         </div>
     </div>
+    <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        
+                                    </div>
+                                    <h4 class="page-title">Slider</h4>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
     <!-- end page title -->
 
     <div class="row">
@@ -123,7 +179,7 @@
                             <div class="col-sm-12">
                                 <div class="mb-3">
                                     <label for="example-input-normal" class="form-label">Select Vendor</label>
-                                    <select class="form-select" name="user_id" required id="example-select">
+                                    <select class="form-select" name="user_id" id="example-select">
                                         <option value="">Not a Vendor Product</option>
                                         @foreach($vendors as $vendor)
                                         <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
@@ -235,20 +291,93 @@
                                     <label for="example-input-normal" class="form-label">Description</label>
                                     <textarea name="description" class="form-control" id=""></textarea>
                                 </div>
-                                <h4>Product Details</h4>
+                                
+                            </div>
+                            <div class="col-sm-10">
+                                
+                                <div class="mb-3">
+                                    <h4>Product Measurement</h4>
+                                    <label for="example-input-normal" class="form-label">Select Product Attribute</label>
+                                    <select name="" class="form-control" id="attribute_selected">
+                                        <option value="">Chose One</option>
+                                        @isset($productAttributes)
+                                        @foreach($productAttributes as $productAttribute)
+                                        <option value="{{ json_encode($productAttribute) }}">{{ $productAttribute->name }}</option>
+                                        @endforeach
+                                        @endisset
+                                    </select>
+                                </div>
                             </div>
 
-                            @foreach($productAttributes as $productAttribute)
-                                    <div class="col-sm-2">
-                                        <div class="mb-3">
-                                            <label for="example-input-normal" class="form-label">{{ $productAttribute->name }}</label>
-                                            <input type="text" name="attributes[]" class="form-control">
-                                            <input type="text" name="attributesId[]" hidden value="{{ $productAttribute->id }}" class="form-control">
-                                  
+                            <div class="col-sm-2">
+                                <div class="mb-3">
+                                    <button class="btn btn-success" type="button" style="margin-top: 1.8rem;" onclick="addToCart()">Add</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table id="" class="table table-centered w-100 nowrap">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th width="15%">Name</th>
+                                                        <th>Value</th>
+                                                        <th>Adust Able</th>
+                                                        <th>Min Value</th>
+                                                        <th>Max Value</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableBody">
+
+
+
+                                                </tbody>
+                                            </table>
+
                                         </div>
                                     </div>
-                                   
-                            @endforeach
+
+                                    <div class="col-sm-10">
+                                
+                                <div class="mb-3">
+                                    <h4>Extra prices</h4>
+                                    <label for="example-input-normal" class="form-label">Select Extra Price</label>
+                                    <select name="" class="form-control" id="extra_prices">
+                                        <option value="">Chose One</option>
+                                        @isset($extraPrices)
+                                        @foreach($extraPrices as $extraPrice)
+                                        <option value="{{ json_encode($extraPrice) }}">{{ $extraPrice->name }}</option>
+                                        @endforeach
+                                        @endisset
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="mb-3">
+                                    <button class="btn btn-success" type="button" style="margin-top: 1.8rem;" onclick="addToCartExtraPrices()">Add</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table id="" class="table table-centered w-100 nowrap">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Value</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="extra_prices_table">
+
+
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
                           
                         </div>
 
@@ -372,6 +501,124 @@
     }
 
     fetchSubCategory();
+
+    var addToCartAttributes = [];
+
+
+function addToCart() {
+    var attribute = $('#attribute_selected').val();
+    attribute = JSON.parse(attribute);
+    console.log(attribute);
+    
+    // Get Ingrident Data
+
+    if (attribute !== '') {
+        if (addToCartAttributes.indexOf(attribute['id']) == -1) {
+            addToCartAttributes.push(attribute['id']);
+         
+            var tableRowHTML = `<tr id="${attribute['id']}">
+                                        <td>
+                                            <h5>${attribute['name']}</h5>
+                                            <input type="text" hidden name="attributesId[]" required class="form-control" value="${attribute['id']}">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="any" name="attributes[]" id="measurementValue${attribute['id']}" required  class="form-control">
+                                        </td>
+                                        <td>
+                                            <select name="adjustable[]" required id="measurementChangeAble${attribute['id']}" attribute-id="${attribute['id']}" class="form-control">
+                                                <option value="false">No</option>
+                                                <option value="true">Yes</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" step="any" name="min_value[]" id="MinMeasurement${attribute['id']}" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="any" name="max_value[]" id="MaxMeasurementChangeAble${attribute['id']}" class="form-control">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" type="button" onclick="removeAttribute(${attribute['id']})">X</button>
+                                        </td>
+                                    </tr>`;
+
+                    $('#tableBody').append(tableRowHTML);
+        } else {
+            $('#measurementValue' + attribute + '').focus();
+        }
+
+    } else {
+        $.toast({
+            heading: 'Information',
+            text: "Please Select Attribute",
+            icon: 'error',
+            loader: true, // Change it to false to disable loader
+            loaderBg: 'error', // To change the background
+            postion: "top - right"
+        })
+    }
+
+    function removeAttribute(attributeId) {
+        console.log('removeAttribute fu');
+        
+        $('#' + attributeId + '').remove();
+        var attributeIndex = addToCartAttributes.indexOf(attributeId)
+        addToCartAttributes.splice(attributeIndex, 1);
+    }
+}
+
+var addToCartExtraPricesArr = [];
+
+
+function addToCartExtraPrices() {
+    var extraPrice = $('#extra_prices').val();
+    extraPrice = JSON.parse(extraPrice);
+    console.log(extraPrice);
+    
+    // Get Ingrident Data
+
+    if (extraPrice !== '') {
+        if (addToCartExtraPricesArr.indexOf(extraPrice['id']) == -1) {
+            addToCartExtraPricesArr.push(extraPrice['id']);
+         
+            var tableRowHTML = `<tr id="${extraPrice['id']}">
+                                        <td>
+                                            <h5>${extraPrice['name']}</h5>
+                                            <input type="text" hidden name="price_ids[]" required class="form-control" value="${extraPrice['id']}">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="any" name="price_values[]" id="extraPrices${extraPrice['id']}" required  class="form-control">
+                                        </td>
+                                    
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" type="button" onclick="removeExtraPrice(${extraPrice['id']})">X</button>
+                                        </td>
+                                    </tr>`;
+
+                    $('#extra_prices_table').append(tableRowHTML);
+        } else {
+            $('#extraPrices' + extraPrice + '').focus();
+        }
+
+    } else {
+        $.toast({
+            heading: 'Information',
+            text: "Please Select Price",
+            icon: 'error',
+            loader: true, // Change it to false to disable loader
+            loaderBg: 'error', // To change the background
+            postion: "top - right"
+        })
+    }
+}
+    
+
+    function removeExtraPrice(extraPriceID) {
+        console.log('removeAttribute fu');
+        
+        $('#' + extraPriceID + '').remove();
+        var extraPriceIndex = addToCartExtraPricesArr.indexOf(extraPriceID)
+        addToCartExtraPricesArr.splice(extraPriceIndex, 1);
+    }
 </script>
 
 

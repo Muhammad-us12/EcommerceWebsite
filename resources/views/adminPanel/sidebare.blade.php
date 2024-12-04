@@ -54,6 +54,20 @@
         </ul>
     </div>
 </li>
+<li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#locations" aria-expanded="false" aria-controls="locations" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Locations </span>
+    </a>
+    <div class="collapse" id="locations">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/location') }}">Locations</a>
+            </li>
+        </ul>
+    </div>
+</li>
 
 <li class="side-nav-item">
     <a data-bs-toggle="collapse" href="#ProductAttribute" aria-expanded="false" aria-controls="ProductAttribute" class="side-nav-link">
@@ -65,6 +79,21 @@
         <ul class="side-nav-second-level">
             <li>
                 <a href="{{ URL::to('admin/product-attribute') }}">Product Attribute</a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+<li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#extraPrices" aria-expanded="false" aria-controls="extraPrices" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Extra Prices </span>
+    </a>
+    <div class="collapse" id="extraPrices">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/extra-price') }}">Extra Prices</a>
             </li>
         </ul>
     </div>

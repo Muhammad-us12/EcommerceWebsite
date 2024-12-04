@@ -75,9 +75,16 @@
                 <div class="col-12">
                     <div class="tabs-categorys-list-four">
                         <ul class="nav justify-content-center" role="tablist">
-                           <li class="active"><a class="active" href="#arrival" role="tab" data-bs-toggle="tab">New Arrival</a></li>
-                           <li><a href="#onsale"  role="tab" data-bs-toggle="tab">OnSale</a></li>
-                           <li><a href="#featured" role="tab" data-bs-toggle="tab">Featured Products</a></li>
+                            @isset($categoriesWithProducts)
+                            @foreach($categoriesWithProducts as $categoriesWithProduct)
+                            @php
+                            if ($loop->iteration == 4) {
+                                break;
+                            }
+                            @endphp
+                           <li class="active"><a class="@if($loop->iteration == 1) active @endif" href="#cat{{ $categoriesWithProduct->id }}" role="tab" data-bs-toggle="tab">{{ $categoriesWithProduct->name }}</a></li>
+                           @endforeach
+                           @endisset
                        </ul>
                     </div>
                 </div>
@@ -86,13 +93,21 @@
             <div class="product-wrapper-tab-panel">
                 <!-- tab-contnt start -->
                 <div class="tab-content">
-                    <div class="tab-pane active" id="arrival">
+                @isset($categoriesWithProducts)
+                    @foreach($categoriesWithProducts as $categoriesWithProduct)
+                    @php
+                            if ($loop->iteration == 4) {
+                                break;
+                            }
+                            @endphp 
+                    <div class="tab-pane @if($loop->iteration == 1) active @endif" id="cat{{ $categoriesWithProduct->id }}">
                         <div class="row product-slider">
+                            @foreach($categoriesWithProduct->products as $product)
                             <div class="col-12">
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="{{ URL::to('product-details/'.$product->id) }}"><img style="height:18rem" src="{{ $product->getFirstMediaUrl('image') }}" alt=""></a>
                                         <span class="label-product label-new">new</span>
                                         <div class="quick_view">
                                             <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
@@ -102,13 +117,13 @@
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <h3><a href="product-details.html">nec facilisi Fusce</a></h3>
+                                        <h3><a href="product-details.html">{{ $product->name }}</a></h3>
                                         <div class="price-box">
-                                            <span class="new-price">$53.27</span>
-                                            <span class="old-price">$58.49</span>
+                                            <span class="new-price">{{ $product->price }} PKR </span>
+                                            <!-- <span class="old-price">$58.49</span> -->
                                         </div>
                                         <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
+                                            <a href="{{ URL::to('product-details/'.$product->id) }}" class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</a>
                                             <div class="star_content">
                                                 <ul class="d-flex">
                                                     <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
@@ -123,478 +138,11 @@
                                 </div>
                                 <!-- single-product-wrap end -->
                             </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Fusce Yoga Straps1</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$57.27</span>
-                                            <span class="old-price">$52.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Wrinted Summer Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$51.27</span>
-                                            <span class="old-price">$54.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-4%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Printed Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$91.27</span>
-                                            <span class="old-price">$84.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Printed Summer Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$51.27</span>
-                                            <span class="old-price">$54.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="tab-pane" id="onsale">
-                        <div class="row product-slider">
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-9%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Fusce nec facilisi</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$53.27</span>
-                                            <span class="old-price">$58.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Sprite Yoga Straps1</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$57.27</span>
-                                            <span class="old-price">$52.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Wrinted Summer Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$51.27</span>
-                                            <span class="old-price">$54.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-4%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Printed Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$91.27</span>
-                                            <span class="old-price">$84.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Printed Summer Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$51.27</span>
-                                            <span class="old-price">$54.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="featured">
-                        <div class="row product-slider">
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-9%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Fusce nec facilisi</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$53.27</span>
-                                            <span class="old-price">$58.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Sprite Yoga Straps1</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$57.27</span>
-                                            <span class="old-price">$52.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Wrinted Summer Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$51.27</span>
-                                            <span class="old-price">$54.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-4%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Printed Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$91.27</span>
-                                            <span class="old-price">$84.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                            <div class="col-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="product-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
-                                        <span class="label-product label-new">new</span>
-                                        <span class="label-product label-sale">-7%</span>
-                                        <div class="quick_view">
-                                            <a href="#" title="quick view" class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-search"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="product-details.html">Printed Summer Dress</a></h3>
-                                        <div class="price-box">
-                                            <span class="new-price">$51.27</span>
-                                            <span class="old-price">$54.49</span>
-                                        </div>
-                                        <div class="product-action">
-                                            <button class="add-to-cart" title="Add to cart"><i class="fa fa-plus"></i> Add to cart</button>
-                                            <div class="star_content">
-                                                <ul class="d-flex">
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star" href="#"><i class="fa fa-star"></i></a></li>
-                                                    <li><a class="star-o" href="#"><i class="fa fa-star-o"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                @endisset
                 </div>
                 <!-- tab-contnt end -->
             </div>
@@ -630,6 +178,7 @@
     <div class="trending-products-area section-pb">
         <div class="container">
             <div class="row">
+           
                 <div class="col-lg-4">
                     <div class="single-trend-cetagory mt--30">
                         <div class="section-title-three">
@@ -639,6 +188,7 @@
                             <!-- trend-product-wrap start -->
                             <div class="col trend-product-wrap">
                                 <!-- trend-single-product start -->
+                                 
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
                                         <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
@@ -725,6 +275,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-lg-4">
                     <div class="single-trend-cetagory mt--30">
                         <div class="section-title-three">
