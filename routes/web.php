@@ -3,7 +3,9 @@
 use App\Enums\UserRoles;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ExtraPricesController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductAttributeController;
@@ -18,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WebsiteController::class, 'index']);
 Route::get('/product-details/{product}', [WebsiteController::class, 'productDetails']);
 Route::get('/register-vendor', [WebsiteController::class, 'registerVendor']);
+
+Route::post('/add-to-cart/{product}', [CartController::class, 'addToCart']);
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 // Routes for users with 'admin' role
 Route::prefix('admin')

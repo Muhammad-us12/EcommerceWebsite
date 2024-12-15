@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Boyka - Fashion eCommerce Bootstrap 4 HTML5 Template</title>
+    <title>Athnuim</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -30,6 +30,7 @@
 
     <!-- Modernizer JS -->
     <script src="{{ asset('website/assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -117,6 +118,8 @@
                     </div>
                 </div>
             </div>
+
+            
             <!-- Header-top end -->
             <!-- Header-bottom start -->
             <div class="header-bottom-area header-sticky">
@@ -170,6 +173,7 @@
                                         <div class="dropdown-menu mini-cart-wrap">
                                             <div class="shopping-cart-content">
                                                 <ul class="mini-cart-content">
+                                                    
                                                     <!-- Mini-Cart-item start -->
                                                     <li class="mini-cart-item">
                                                         <div class="mini-cart-product-img">
@@ -228,7 +232,9 @@
                                                     <li>
                                                         <!-- shopping-cart-btn start -->
                                                         <div class="shopping-cart-btn">
-                                                            <a href="checkout.html">Checkout</a>
+                                                        <a href="checkout.html">Checkout</a>
+                                                        <a href="{{ URL::to('cart') }}">View All</a>
+                                                            
                                                         </div>
                                                         <!-- shopping-cart-btn end -->
                                                     </li>

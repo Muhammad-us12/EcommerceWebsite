@@ -236,7 +236,6 @@
     <!-- Main JS -->
     <script src="{{ asset('website/assets/js/main.js') }}"></script>
 
-
 </body>
 
 

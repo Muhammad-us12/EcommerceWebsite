@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
+use Carbon\Carbon;
 
 class WebsiteController extends Controller
 {
@@ -26,7 +27,10 @@ class WebsiteController extends Controller
     public function productDetails(Product $product)
     {
         $productGallies = $product->getMedia('gallery');
+        $currentDate = date('Y-m-d');
+        $dateAfter12Months = Carbon::now()->addMonths(12);
+        $dateAfter12Months = $dateAfter12Months->format('Y-m-d');
 
-        return view('website.productDetails', compact('product', 'productGallies'));
+        return view('website.productDetails', compact('product', 'productGallies', 'currentDate', 'dateAfter12Months'));
     }
 }

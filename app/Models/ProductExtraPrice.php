@@ -15,4 +15,9 @@ class ProductExtraPrice extends Model
         'value',
         'product_id',
     ];
+
+    public function extraPrice()
+    {
+        return $this->belongsTo(ExtraPrices::class, 'price_id');
+    }
 }

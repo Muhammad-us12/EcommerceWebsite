@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Picker with Selected Dates</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body>
+    <h1>Select Up to 5 Dates</h1>
+    <input id="datePicker" type="text" placeholder="Pick dates">
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Initialize Flatpickr
+        flatpickr("#datePicker", {
+            mode: "multiple", // Allows selecting multiple dates
+            maxDate: "today", // Example: Prevent future dates
+            dateFormat: "Y-m-d", // Format for selected dates
+            maxDate: "today", // Optional: Restrict future dates
+            onChange: function (selectedDates) {
+                if (selectedDates.length > 5) {
+                    alert("You can only select up to 5 dates.");
+                    selectedDates.pop(); // Remove the extra date
+                    this.setDate(selectedDates); // Update the picker
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

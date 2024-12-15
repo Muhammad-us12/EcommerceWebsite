@@ -62,4 +62,9 @@ class Product extends Model implements HasMedia
     {
         return $this->hasMany(ProductAssignedAttributes::class);
     }
+
+    public function productExtraPrices()
+    {
+        return $this->hasMany(ProductExtraPrice::class);
+    }
 }

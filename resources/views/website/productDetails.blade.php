@@ -24,6 +24,17 @@
     <div class="content-wraper">
         <div class="container">
             <div class="row single-product-area">
+                <div class="col-md-12">
+                @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                </div>
                 <div class="col-lg-6 col-md-6">
                    <!-- Product Details Left -->
                     <div class="product-details-left">
@@ -52,12 +63,14 @@
                 </div>
 
                 <div class="col-lg-6 col-md-6">
+                    <form action="{{ URL::to('add-to-cart/'.$product->id.'') }}" method="post">
+                        @csrf
                     <div class="product-details-view-content">
                         <div class="product-info">
                             <h2>{{ $product->name }}</h2>
                             <div class="price-box">
                                 <!-- <span class="old-price">$70.00</span> -->
-                                <span class="new-price">{{ $product->cost_price }}.00 PKR</span>
+                                <span class="new-price">{{ $product->price }}.00 PKR</span>
                                 <span class="discount discount-percentage">Save 5%</span>
                             </div>
                             <p>{{ Str::limit($product->description,200) }}</p>
@@ -72,22 +85,165 @@
                                     <label>Brand: {{ $product->brand->name }}</label>
                                 </div>
                             </div>
-                            <div class="single-add-to-cart">
-                                <form action="#" class="cart-quantity">
-                                    <div class="quantity">
-                                        <label>Quantity</label>
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
-                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                        </div>
-                                    </div>
-                                    <button class="add-to-cart" type="submit">Add to cart</button>
-                                </form>
-                            </div>
+                           
                             <div class="product-availability">
+                                <h4>Select Your Dates</h4>
+                                <input id="dateRangePicker" name="bookingDates" required type="text" placeholder="Select date range">
+                                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                                <script>
+                                    // Initialize Flatpickr as a range picker
+                                    flatpickr("#dateRangePicker", {
+                                        mode: "range", // Enable range selection
+                                        dateFormat: "Y-m-d", // Format for selected dates
+                                        defaultDate: ["2024-01-01", "2024-01-07"], // Optional default range
+                                        minDate: "{{ $currentDate }}", // Minimum selectable date
+                                        maxDate: "{{ $dateAfter12Months }}", // Maximum selectable date
+                                        disable: [
+                                    "2024-01-03", // Disable specific dates
+                                    "2024-01-05"],
+                                        onChange: function(selectedDates) {
+                                            if (selectedDates.length === 2) {
+                                            }
+                                        },
+                                    });
+                                </script>
                               <i class="fa fa-check"></i> In stock
                             </div>
+                            <div>
+                            @isset($product->productExtraPrices)
+                                    <h4 class="mt-4">You Can Add Additional Services</h4>
+                                    @foreach($product->productExtraPrices as $productExtraPrice)
+                                            <div class="form-check mr-2">
+                                                <input class="form-check-input" type="checkbox" name="selectedExtraPrices[]" value="{{ $productExtraPrice->id }}" id="extraPrice{{ $productExtraPrice->id }}">
+                                                <label class="form-check-label" for="extraPrice{{ $productExtraPrice->id }}">
+                                                {{ $productExtraPrice->extraPrice->name }} Price {{ $productExtraPrice->value }} PKR 
+                                                </label>
+                                            </div>
+                                    @endforeach
+                                @endisset
+                            </div>
+                            <div>
+                                <div class="pro_feature">
+                                    <h2 class="title_3">Size Details</h2>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                @isset($product->productAssignedAttributes)
+                                                    @foreach($product->productAssignedAttributes as $productAttribute)
+                                                        <th scope="col">{{ $productAttribute->productAttribute->name }}</th>
+                                                    @endforeach
+                                                @endisset
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            @php 
+                                                $measurementAdjustable = false;
+                                            @endphp
+                                                @isset($product->productAssignedAttributes)
+                                                    @foreach($product->productAssignedAttributes as $productAttribute)
+                                                        @php 
+                                                            if($productAttribute->adjustable){
+                                                                $measurementAdjustable = true;
+                                                            }
+                                                        @endphp
+                                                        <th scope="col">{{ $productAttribute->value }}</th>
+                                                    @endforeach
+                                                @endisset
+                                            
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                        @if($measurementAdjustable)
+                                        <div class="div">
+                                            <div class="form-check">
+                                                <input class="form-check-input" onchange="checkSizeAdjustable()" type="radio" value="true" name="goodFit" id="flexRadioDefault1" checked>
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Good Fit
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" onchange="checkSizeAdjustable()" type="radio" value="false" name="goodFit" id="flexRadioDefault2">
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    Not Good Fit
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div id="notGoodFitModal" class="modal" tabindex="-1">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Not Good Fit Selected</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <h2 class="title_3">Adjust it</h2>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                <th>Name</th>
+                                                                <th>Value</th>
+                                                                <th>Adjustable</th>
+                                                                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            @isset($product->productAssignedAttributes)
+                                                                @foreach($product->productAssignedAttributes as $productAttribute)
+                                                                    @if($productAttribute->adjustable)
+                                                                    <tr>
+                                                                        <td>{{ $productAttribute->productAttribute->name }}</td>
+                                                                        <td>{{ $productAttribute->value }}</td>
+                                                                        <td>
+                                                                        <input type="text" name="adjustableIds[]" hidden value="{{ $productAttribute->id }}">
+                                                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text">{{ $productAttribute->min_value }}</span>
+                                                                                    
+                                                                                    <input type="number" name="adjustableValues[]" step="any" class="form-control" value="{{ $productAttribute->value }}" aria-label="Amount (to the nearest dollar)">
+                                                                                <span class="input-group-text">{{ $productAttribute->max_value }}</span>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endisset
+
+                                                            </tbody>
+                                                            </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            function checkSizeAdjustable() {
+                                                const goodFitValue = document.querySelector('input[name="goodFit"]:checked').value;
+                                                
+                                                if (goodFitValue === "false") {
+                                                    // Open the modal
+                                                    const modal = new bootstrap.Modal(document.getElementById('notGoodFitModal'));
+                                                    modal.show();
+                                                }
+                                            }
+
+                                        </script>
+
+                                        @endif
+
+                                </div>
+                            </div>
+                            <div class="single-add-to-cart cart-quantity">
+                                  
+                                    <button class="add-to-cart" type="submit">Add to cart</button>
+                            </div>
+
                             <div class="product-social-sharing">
                                 <label>Share</label>
                                 <ul>
@@ -99,6 +255,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div> 
             </div>
             <div class="row">
@@ -107,9 +264,6 @@
                         <ul role="tablist" class="mb--50 nav">
                             <li class="active" role="presentation">
                                 <a data-bs-toggle="tab" role="tab" href="#description" class="active">Description</a>
-                            </li>
-                            <li role="presentation">
-                                <a data-bs-toggle="tab" role="tab" href="#sheet">Product Size Details</a>
                             </li>
                             <li role="presentation">
                                 <a data-bs-toggle="tab" role="tab" href="#reviews">Reviews</a>
@@ -133,33 +287,7 @@
                         </div>
                         <!-- End Single Content -->
                         <!-- Start Single Content -->
-                        <div class="product_tab_content tab-pane" id="sheet" role="tabpanel">
-                            <div class="pro_feature">
-                                <h2 class="title_3">Size Details</h2>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            @isset($product->productAssignedAttributes)
-                                                @foreach($product->productAssignedAttributes as $productAttribute)
-                                                    <th scope="col">{{ $productAttribute->productAttribute->name }}</th>
-                                                @endforeach
-                                            @endisset
-                                        
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                            @isset($product->productAssignedAttributes)
-                                                @foreach($product->productAssignedAttributes as $productAttribute)
-                                                    <th scope="col">{{ $productAttribute->value }}</th>
-                                                @endforeach
-                                            @endisset
-                                        
-                                        </tr>
-                                    </tbody>
-                                    </table>
-                            </div>
-                        </div>
+                    
                         <!-- End Single Content -->
                         <!-- Start Single Content -->
                         <div class="product_tab_content tab-pane" id="reviews" role="tabpanel">

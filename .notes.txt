@@ -1,0 +1,2 @@
+1: Make Date selection required on add to cart page
+2: Apply Validation for mearsurment on add to cart page
