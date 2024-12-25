@@ -18,6 +18,11 @@ class OrderLineItem extends Model
         'security_deposit',
     ];
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

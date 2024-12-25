@@ -4,6 +4,7 @@ use App\Enums\UserRoles;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\VendorOnBoardingController;
+use App\Http\Controllers\VendorOrderController;
 use Illuminate\Support\Facades\Route;
 
 // Routes for users with 'user' role
@@ -34,5 +35,8 @@ Route::prefix('vendor')
             Route::post('/update', [ProductController::class, 'update']);
             Route::post('/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
         });
+
+        Route::get('/order-list', [VendorOrderController::class, 'index']);
+        Route::get('/orders/{order}', [VendorOrderController::class, 'show']);
 
     });

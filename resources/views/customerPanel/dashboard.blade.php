@@ -3,7 +3,7 @@
 
         @section('sidebare')
 
-        @include('adminPanel/sidebare')
+        @include('customerPanel/sidebare')
 
         @endsection
          @section('content')        

@@ -6,12 +6,15 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerPaymentRequestController;
 use App\Http\Controllers\ExtraPricesController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -106,14 +109,21 @@ Route::prefix('admin')
         Route::prefix('orders')->group(function () {
             Route::get('/', [OrderController::class, 'index']);
             Route::get('/{order}', [OrderController::class, 'show']);
-            Route::put('{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+            Route::post('/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
         });
 
         // Customer
         Route::prefix('customer')->group(function () {
-            Route::get('/', [OrderController::class, 'index']);
-            Route::get('/{order}', [OrderController::class, 'show']);
-            Route::put('{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+            Route::get('/', [CustomerController::class, 'allCustomersList']);
+        });
+
+        Route::prefix('vendor')->group(function () {
+            Route::get('/', [VendorController::class, 'allVendorsList']);
+        });
+
+        Route::prefix('customer-payment-requests')->group(function () {
+            Route::get('/', [CustomerPaymentRequestController::class, 'allPaymentRequestsList']);
+            Route::post('/update-payment-status', [CustomerPaymentRequestController::class, 'update_payment_status']);
         });
 
     });

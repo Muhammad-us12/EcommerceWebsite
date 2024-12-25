@@ -130,6 +130,37 @@
 </li>
 
 <li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#paymentRequest" aria-expanded="false" aria-controls="paymentRequest" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Payment Request</span>
+    </a>
+    <div class="collapse" id="paymentRequest">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/customer-payment-requests') }}">Payment Request</a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+
+<li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#Vendor" aria-expanded="false" aria-controls="Vendor" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Vendor</span>
+    </a>
+    <div class="collapse" id="Vendor">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/vendor') }}">Vendor</a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+<li class="side-nav-item">
     <a data-bs-toggle="collapse" href="#Customer" aria-expanded="false" aria-controls="Customer" class="side-nav-link">
         <i class="uil-home-alt"></i>
         <!-- <span class="badge bg-success float-end">4</span> -->

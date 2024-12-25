@@ -18,8 +18,6 @@ class Customer extends Authenticatable
         'street_address',
         'apartment',
         'phone',
-        'email',
-        'password',
     ];
 
     public function party(): MorphOne
@@ -30,5 +28,15 @@ class Customer extends Authenticatable
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function paymentRequest()
+    {
+        return $this->hasMany(CustomerPaymentRequest::class, 'customer_id');
     }
 }

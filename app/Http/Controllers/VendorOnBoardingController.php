@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Party;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VendorOnBoardingController extends Controller
 {
@@ -29,7 +31,20 @@ class VendorOnBoardingController extends Controller
         ]);
 
         $requestData['user_id'] = Auth::user()->id;
-        $vendor = Vendor::create($requestData);
+
+        $vendor = DB::transaction(function () use ($requestData) {
+            $vendor = Vendor::create($requestData);
+
+            Party::create([
+                'partyable_id' => $vendor->id,
+                'partyable_type' => Vendor::class,
+                'opening_balance' => 0,
+                'balance' => 0,
+            ]);
+
+            return $vendor;
+
+        });
 
         if ($vendor) {
             return redirect()->back()->with(['success' => 'Details Saved Successfully']);
