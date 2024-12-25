@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->date('date')->nullable();
             $table->integer('party_id');
-            $table->string('party_type');
             $table->float('payment', 15)->nullable();
             $table->float('received', 15)->nullable();
             $table->float('price', 15)->nullable();

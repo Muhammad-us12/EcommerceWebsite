@@ -14,12 +14,11 @@ class SavePartyLedger
         PartyLedger::create([
             'date' => $date,
             'party_id' => $party->id,
-            'party_type' => $party->type,
             "{$paymentFeildName}" => $price,
             'balance' => $party->balance,
             "{$feildName}" => $feildId,
             'user_id' => Auth::user()->id,
-            'remarks' => $remarks
+            'remarks' => $remarks,
         ]);
     }
 }

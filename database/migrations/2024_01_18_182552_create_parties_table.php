@@ -13,15 +13,10 @@ return new class extends Migration
     {
         Schema::create('parties', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('type', ['Marka', 'Driver', 'Customer']);
-            $table->string('supplier_id')->nullable();
+            $table->integer('partyable_id');
+            $table->string('partyable_type');
             $table->float('opening_balance', 15)->default(0);
             $table->float('balance', 15)->default(0);
-            $table->string('email')->unique()->nullable();
-            $table->string('company_name')->nullable();
-            $table->string('address')->nullable();
-            $table->integer('user_id');
             $table->timestamps();
         });
     }

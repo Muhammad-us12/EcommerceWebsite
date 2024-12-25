@@ -4,22 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Party extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'type',
-        'supplier_id',
+        'partyable_id',
+        'partyable_type',
         'opening_balance',
         'balance',
-        'email',
-        'company_name',
-        'address',
-        'user_id',
     ];
+
+    public function partyable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 
     public function updateBalance(float $price, string $type)
     {
@@ -30,15 +31,5 @@ class Party extends Model
         }
 
         $this->save();
-    }
-
-    public function supplier()
-    {
-        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(\App\Models\Order::class);
     }
 }
