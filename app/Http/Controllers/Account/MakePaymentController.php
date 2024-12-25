@@ -9,7 +9,6 @@ use App\Actions\UpdatePartyBalance;
 use App\Http\Controllers\Controller;
 use App\Models\Account\MakePayment;
 use App\Models\Account\MakePaymentItems;
-use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +18,15 @@ class MakePaymentController extends Controller
     public function printPaymentVoucher(MakePayment $makePayment)
     {
         $makePayment->load('paymentItems');
+
         return view('adminPanel.accounts.paymentListPrint', ['payment' => $makePayment]);
     }
 
     public function getPaymentAddPage()
     {
         $accounts = AccountController::getAllAccounts();
-        $suppliers = Supplier::all();
-        return view('adminPanel.accounts.payments', ['accounts' => $accounts, 'suppliers' => $suppliers]);
+
+        return view('adminPanel.accounts.payments', ['accounts' => $accounts]);
     }
 
     public function updatePaymentItem(
@@ -37,7 +37,7 @@ class MakePaymentController extends Controller
         $request->validate([
             'payment_id' => ['required', 'exists:make_payment_items,id'],
             'party_id' => ['required', 'integer'],
-            'total_payment' => ['required', 'numeric']
+            'total_payment' => ['required', 'numeric'],
         ]);
 
         $makePaymentItem = MakePaymentItems::find($request->payment_id);
@@ -57,7 +57,7 @@ class MakePaymentController extends Controller
 
                 $makePaymentItem->update([
                     'payment' => $request->total_payment,
-                    'remarks' => $request->remarks
+                    'remarks' => $request->remarks,
                 ]);
 
                 $makePayment = MakePayment::find($makePaymentItem->make_payment_id);
@@ -67,15 +67,15 @@ class MakePaymentController extends Controller
                 // Insert Account Ledger
                 $saveAccountLedger->execute($makePayment->account_id, $paymentDifference, 'payment', 'payment_id', $makePayment->id, 'Payment Update', date: date('Y-m-d'));
 
-
                 $result = $makePayment->update([
-                    'total_payments' => $makePayment->total_payments + $paymentDifference
+                    'total_payments' => $makePayment->total_payments + $paymentDifference,
                 ]);
             });
 
             return redirect()->back()->with(['success' => 'Payment Item Updated Successfully']);
         } catch (\Exception $e) {
             dd($e);
+
             return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
         }
     }
@@ -89,7 +89,7 @@ class MakePaymentController extends Controller
 
         // Insert Party Ledger
         $SavePartyLedger = app(SavePartyLedger::class);
-        $SavePartyLedger->execute($MakePaymentItem->particular_id, $paymentDifference, 'payment_id', 'received', $MakePaymentItem->id, $requestData['remarks'] . ". Payment Update", date: date('Y-m-d'));
+        $SavePartyLedger->execute($MakePaymentItem->particular_id, $paymentDifference, 'payment_id', 'received', $MakePaymentItem->id, $requestData['remarks'].'. Payment Update', date: date('Y-m-d'));
     }
 
     private function updateAccountData(array $requestData, MakePaymentItems $MakePaymentItem)
@@ -101,7 +101,7 @@ class MakePaymentController extends Controller
 
         // Insert Account Ledger
         $saveAccountLedger = app(SaveAccountLedger::class);
-        $saveAccountLedger->execute($MakePaymentItem->particular_id, $paymentDifference, 'received', 'sub_payment_id', $MakePaymentItem->id, $requestData['remarks'] . ". Payment Update", date: date('Y-m-d'));
+        $saveAccountLedger->execute($MakePaymentItem->particular_id, $paymentDifference, 'received', 'sub_payment_id', $MakePaymentItem->id, $requestData['remarks'].'. Payment Update', date: date('Y-m-d'));
     }
 
     public function updatePayment(
@@ -112,7 +112,7 @@ class MakePaymentController extends Controller
         $request->validate([
             'payment_id' => ['required', 'exists:make_payments,id'],
             'accountId' => ['required', 'exists:make_payments,id'],
-            'date' => ['required', 'date']
+            'date' => ['required', 'date'],
         ]);
 
         try {
@@ -142,6 +142,7 @@ class MakePaymentController extends Controller
             return redirect()->back()->with(['success' => 'Payment Make Updated Successfully']);
         } catch (\Exception $e) {
             dd($e);
+
             return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
         }
     }
@@ -159,7 +160,7 @@ class MakePaymentController extends Controller
 
                 $makePayment = MakePayment::find($paymentItem->make_payment_id);
                 $makePayment->update([
-                    'total_payments' => $makePayment->total_payments - $paymentItem->payment
+                    'total_payments' => $makePayment->total_payments - $paymentItem->payment,
                 ]);
 
                 $paymentItem->delete();
@@ -179,7 +180,7 @@ class MakePaymentController extends Controller
 
         // Insert Party Ledger
         $SaveAccountLedger = app(SaveAccountLedger::class);
-        $SaveAccountLedger->execute($paymentItem->particular_id, $paymentItem->payment, 'payment', 'payment_id',  $paymentItem->id, 'Payment Deleted');
+        $SaveAccountLedger->execute($paymentItem->particular_id, $paymentItem->payment, 'payment', 'payment_id', $paymentItem->id, 'Payment Deleted');
     }
 
     public function adjustPartyBalance(MakePaymentItems $paymentItem)
@@ -211,8 +212,8 @@ class MakePaymentController extends Controller
             'error' => false,
             'data' => [
                 'payment' => $payment,
-                'payment_date' => date('m-d-Y', strtotime($payment->date))
-            ]
+                'payment_date' => date('m-d-Y', strtotime($payment->date)),
+            ],
         ]);
     }
 
@@ -220,12 +221,14 @@ class MakePaymentController extends Controller
     {
         $accounts = AccountController::getAllAccounts();
         $makePayments = MakePayment::orderBy('id', 'desc')->paginate(10);
+
         return view('adminPanel.accounts.paymentsList', ['accounts' => $accounts, 'makePayments' => $makePayments]);
     }
 
     public function viewPaymentDetails($paymentId)
     {
         $makePaymentItems = MakePaymentItems::where('make_payment_id', $paymentId)->get();
+
         return view('adminPanel.accounts.paymentsListDetails', ['makePaymentItems' => $makePaymentItems]);
     }
 
@@ -234,14 +237,10 @@ class MakePaymentController extends Controller
         return response()->json([
             'error' => false,
             'data' => [
-                'paymentItem' => $makePaymentItem
-            ]
+                'paymentItem' => $makePaymentItem,
+            ],
         ]);
     }
-
-
-
-
 
     public function addMakePayment(
         Request $request,
@@ -289,6 +288,7 @@ class MakePaymentController extends Controller
             return redirect()->back()->with(['success' => 'Payment Make Successfully']);
         } catch (\Exception $e) {
             dd($e);
+
             return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
         }
     }

@@ -12,14 +12,14 @@ class PartyLedger extends Model
     protected $fillable = [
         'date',
         'party_id',
+        'party_type',
         'payment',
         'received',
         'price',
         'balance',
-        'ingredient_purchase_id',
-        'sale_id',
         'payment_id',
         'recevied_id',
+        'order_id',
         'remarks',
         'user_id'
     ];

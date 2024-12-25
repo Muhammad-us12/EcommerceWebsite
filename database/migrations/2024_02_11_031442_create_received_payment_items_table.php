@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('particular');
             $table->integer('particular_id');
             $table->string('particular_name');
-            $table->float('payment');
+            $table->float('payment', 15);
             $table->string('remarks')->nullable();
             $table->timestamps();
         });

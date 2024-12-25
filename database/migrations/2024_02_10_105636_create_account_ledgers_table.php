@@ -14,16 +14,14 @@ return new class extends Migration
         Schema::create('account_ledgers', function (Blueprint $table) {
             $table->id();
             $table->date('date')->nullable();
-            $table->float('payment')->nullable();
-            $table->float('received')->nullable();
-            $table->float('balance');
+            $table->float('payment', 15)->nullable();
+            $table->float('received', 15)->nullable();
+            $table->float('balance', 15);
             $table->integer('deposit_id')->nullable();
             $table->integer('payment_id')->nullable();
             $table->integer('sub_payment_id')->nullable();
             $table->integer('sub_recevied_payment_id')->nullable();
             $table->integer('received_id')->nullable();
-            $table->integer('sale_id')->nullable();
-            $table->integer('purchase_id')->nullable();
             $table->integer('expense_id')->nullable();
             $table->integer('account_id');
             $table->string('remarks')->nullable();

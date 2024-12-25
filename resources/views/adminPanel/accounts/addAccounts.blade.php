@@ -1,7 +1,15 @@
-@extends('adminPanel/master')
-@section('style')
-<link href="{{ asset('public/adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+
+@extends('adminPanel/master') 
+        @section('style')
+        <link href="{{ asset('public/adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+        @endsection
+
+        @section('sidebare')
+
+        @include('adminPanel/sidebare')
+     
+
+        @endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">

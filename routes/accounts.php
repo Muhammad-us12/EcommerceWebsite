@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/add-party', [PartyController::class, 'addParty']);
     Route::get('/get-parties-list', [PartyController::class, 'getpartiesList']);
     Route::get('/get-party/{id}', [PartyController::class, 'getParty']);
-    Route::post('/update-party', [PartyController::class, 'updateParty'])->name('party.update');
+    Route::post('/update-party', [PartyController::class, 'updateParty']);
 });
 
 Route::middleware(['auth'])->group(function () {

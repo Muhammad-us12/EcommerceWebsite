@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('make_payments', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->float('prev_balance');
-            $table->float('updated_balance');
-            $table->float('total_payments');
+            $table->float('prev_balance', 15);
+            $table->float('updated_balance', 15);
+            $table->float('total_payments', 15);
             $table->integer('account_id');
             $table->integer('user_id');
             $table->timestamps();

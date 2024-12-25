@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cash_deposits', function (Blueprint $table) {
             $table->id();
-            $table->float('deposit_amount');
+            $table->float('deposit_amount', 15);
             $table->string('deposit_by');
             $table->integer('account_id');
             $table->integer('user_id');
