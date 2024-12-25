@@ -17,7 +17,9 @@ class ProductExtraPriceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'price_id' => fake()->randomNumber(9),
+            'value' => fake()->randomNumber(9),
+            'product_id' => fake()->randomNumber(9),
         ];
     }
 }

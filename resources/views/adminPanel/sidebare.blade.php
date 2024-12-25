@@ -113,3 +113,89 @@
         </ul>
     </div>
 </li>
+
+<li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#Orders" aria-expanded="false" aria-controls="Orders" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Orders</span>
+    </a>
+    <div class="collapse" id="Orders">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/orders') }}">Orders</a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+<li class="side-nav-item">
+    <a data-bs-toggle="collapse" href="#Customer" aria-expanded="false" aria-controls="Customer" class="side-nav-link">
+        <i class="uil-home-alt"></i>
+        <!-- <span class="badge bg-success float-end">4</span> -->
+        <span> Customer</span>
+    </a>
+    <div class="collapse" id="Customer">
+        <ul class="side-nav-second-level">
+            <li>
+                <a href="{{ URL::to('admin/customer') }}">Customer</a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#party" aria-expanded="false" aria-controls="party" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <!-- <span class="badge bg-success float-end">4</span> -->
+                            <span> Party </span>
+                        </a>
+                        <div class="collapse" id="party">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="{{ URL::to('get-parties-list') }}">Party list</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#account" aria-expanded="false" aria-controls="agentNav" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <!-- <span class="badge bg-success float-end">4</span> -->
+                            <span> Accounts </span>
+                        </a>
+                        <div class="collapse" id="account">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="{{ URL::to('add-account') }}">Accounts list & Cash Deposit</a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::to('add-make-payment') }}">Payments & Receiving</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#expenseNav" aria-expanded="false" aria-controls="expenseNav" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <span class="badge bg-success float-end">4</span>
+                            <span> Expense </span>
+                        </a>
+                        <div class="collapse" id="expenseNav">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="{{ URL::to('expense-list') }}">Expense List</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ URL::to('expense-categories') }}">Categories</a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::to('expense-sub-categories') }}">Sub Categories</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>

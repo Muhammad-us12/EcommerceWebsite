@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ExtraPricesController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
@@ -23,6 +24,8 @@ Route::get('/register-vendor', [WebsiteController::class, 'registerVendor']);
 
 Route::post('/add-to-cart/{product}', [CartController::class, 'addToCart']);
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/order-confirmation/{order}', [CheckoutController::class, 'confirmation'])->name('order.confirmation');
 
 // Routes for users with 'admin' role
 Route::prefix('admin')
@@ -99,6 +102,20 @@ Route::prefix('admin')
             Route::post('/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
         });
 
+        // Orders
+        Route::prefix('orders')->group(function () {
+            Route::get('/', [OrderController::class, 'index']);
+            Route::get('/{order}', [OrderController::class, 'show']);
+            Route::put('{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+        });
+
+        // Customer
+        Route::prefix('customer')->group(function () {
+            Route::get('/', [OrderController::class, 'index']);
+            Route::get('/{order}', [OrderController::class, 'show']);
+            Route::put('{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+        });
+
     });
 
 Route::middleware([
@@ -122,3 +139,4 @@ Route::get('/logout', function () {
 
 include_once 'customer.php';
 include_once 'vendor.php';
+include_once 'accounts.php';
