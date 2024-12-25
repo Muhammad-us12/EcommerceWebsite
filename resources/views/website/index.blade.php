@@ -37,21 +37,21 @@
                 <div class="col-lg-3 col-md-6 order-2 order-lg-1">
                     <!-- single-banner start -->
                     <div class="single-banner mt--30">
-                        <a href="shop.html"><img src="{{ asset('website/assets/images/banner/banner_02.png') }}" alt=""></a>
+                        <a href="shop.html"><img src="{{ asset('public/website/assets/images/banner/banner_02.png') }}" alt=""></a>
                     </div>
                     <!-- single-banner end -->
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
                     <!-- single-banner start -->
                     <div class="single-banner mt--30">
-                        <a href="shop.html"><img src="{{ asset('website/assets/images/banner/banner_02.png') }}" alt=""></a>
+                        <a href="shop.html"><img src="{{ asset('public/website/assets/images/banner/banner_02.png') }}" alt=""></a>
                     </div>
                     <!-- single-banner end -->
                 </div>
                 <div class="col-lg-3 col-md-6 order-3 order-lg-3">
                     <!-- single-banner start -->
                     <div class="single-banner mt--30">
-                        <a href="shop.html"><img src="{{ asset('website/assets/images/banner/banner_02.png') }}" alt=""></a>
+                        <a href="shop.html"><img src="{{ asset('public/website/assets/images/banner/banner_02.png') }}" alt=""></a>
                     </div>
                     <!-- single-banner end -->
                 </div>
@@ -158,14 +158,14 @@
                 <div class="col-lg-6 col-md-6">
                     <!-- single-banner start -->
                     <div class="single-banner-two mt--30">
-                        <a href="shop.html"><img src="{{ asset('website/assets/images/banner/banner_4.png') }}" alt=""></a>
+                        <a href="shop.html"><img src="{{ asset('public/website/assets/images/banner/banner_4.png') }}" alt=""></a>
                     </div>
                     <!-- single-banner end -->
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <!-- single-banner start -->
                     <div class="single-banner-two mt--30">
-                        <a href="shop.html"><img src="{{ asset('website/assets/images/banner/banner_5.png') }}" alt=""></a>
+                        <a href="shop.html"><img src="{{ asset('public/website/assets/images/banner/banner_5.png') }}" alt=""></a>
                     </div>
                     <!-- single-banner end -->
                 </div>
@@ -191,7 +191,7 @@
                                  
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">New Mix Material</a></h3>
@@ -204,7 +204,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Summer Dress</a></h3>
@@ -217,7 +217,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress Mix</a></h3>
@@ -234,7 +234,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">New Mix Material</a></h3>
@@ -247,7 +247,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress Mix</a></h3>
@@ -260,7 +260,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress1</a></h3>
@@ -288,7 +288,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress1</a></h3>
@@ -301,7 +301,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress1 mix</a></h3>
@@ -314,7 +314,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">New Mix Dress</a></h3>
@@ -331,7 +331,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">New Mix Material</a></h3>
@@ -344,7 +344,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress Mix</a></h3>
@@ -357,7 +357,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress1</a></h3>
@@ -383,7 +383,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">New Mix Material</a></h3>
@@ -396,7 +396,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Summer Dress</a></h3>
@@ -409,7 +409,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product/10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product/10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress1</a></h3>
@@ -426,7 +426,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">New Mix Material</a></h3>
@@ -439,7 +439,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Summer Dress</a></h3>
@@ -452,7 +452,7 @@
                                 <!-- trend-single-product start -->
                                 <div class="trend-single-product">
                                     <div class="trend-product-image">
-                                        <a href="porduct-details.html"><img src="{{ asset('website/assets/images/product10.jpg') }}" alt=""></a>
+                                        <a href="porduct-details.html"><img src="{{ asset('public/website/assets/images/product10.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="trend-product-content">
                                         <h3><a href="#">Printed Dress1</a></h3>
@@ -494,7 +494,7 @@
                             <p class="des_testimonial">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veniam esse adipisci provident optio, eius non ullam ab alias voluptate quos, atque voluptatem quo itaque fuga rem ex corporis</p>
                             <div class="content_author">
                                 <div class="author-image">
-                                    <img src="{{ asset('website/assets/images/comment/com-author.png') }}" alt="">
+                                    <img src="{{ asset('public/website/assets/images/comment/com-author.png') }}" alt="">
                                 </div>
                             </div>
                             <p class="des_namepost">orando BLoom</p>
@@ -505,7 +505,7 @@
                             <p class="des_testimonial">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veniam esse adipisci provident optio, eius non ullam ab alias voluptate quos, atque voluptatem quo itaque fuga rem ex corporis</p>
                             <div class="content_author">
                                 <div class="author-image">
-                                    <img src="{{ asset('website/assets/images/comment/com-author.png') }}" alt="">
+                                    <img src="{{ asset('public/website/assets/images/comment/com-author.png') }}" alt="">
                                 </div>
                             </div>
                             <p class="des_namepost">orando BLoom</p>
@@ -516,7 +516,7 @@
                             <p class="des_testimonial">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veniam esse adipisci provident optio, eius non ullam ab alias voluptate quos, atque voluptatem quo itaque fuga rem ex corporis</p>
                             <div class="content_author">
                                 <div class="author-image">
-                                    <img src="{{ asset('website/assets/images/comment/com-author.png') }}" alt="">
+                                    <img src="{{ asset('public/website/assets/images/comment/com-author.png') }}" alt="">
                                 </div>
                             </div>
                             <p class="des_namepost">orando BLoom</p>
@@ -548,7 +548,7 @@
                     <div class="single-latest-blog mt--30">
                         <div class="latest-blog-image">
                             <a href="blog-details.html">
-                                <img src="{{ asset('website/assets/images/blog/1.jpg') }}" alt="">
+                                <img src="{{ asset('public/website/assets/images/blog/1.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="latest-blog-content">
@@ -567,7 +567,7 @@
                     <div class="single-latest-blog mt--30">
                         <div class="latest-blog-image">
                             <a href="blog-details.html">
-                                <img src="{{ asset('website/assets/images/blog/2.jpg') }}" alt="">
+                                <img src="{{ asset('public/website/assets/images/blog/2.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="latest-blog-content">
@@ -586,7 +586,7 @@
                     <div class="single-latest-blog mt--30">
                         <div class="latest-blog-image">
                             <a href="blog-details.html">
-                                <img src="{{ asset('website/assets/images/blog/3.jpg') }}" alt="">
+                                <img src="{{ asset('public/website/assets/images/blog/3.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="latest-blog-content">
@@ -605,7 +605,7 @@
                     <div class="single-latest-blog mt--30">
                         <div class="latest-blog-image">
                             <a href="blog-details.html">
-                                <img src="{{ asset('website/assets/images/blog/4.jpg') }}" alt="">
+                                <img src="{{ asset('public/website/assets/images/blog/4.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="latest-blog-content">
@@ -630,32 +630,32 @@
             <div class="row our-brand-active text-center">
                 <div class="col-12">
                     <div class="single-brand">
-                        <a href="#"><img src="{{ asset('website/assets/images/brand/1.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/website/assets/images/brand/1.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="single-brand">
-                        <a href="#"><img src="{{ asset('website/assets/images/brand/2.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/website/assets/images/brand/2.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="single-brand">
-                        <a href="#"><img src="{{ asset('website/assets/images/brand/3.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/website/assets/images/brand/3.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="single-brand">
-                        <a href="#"><img src="{{ asset('website/assets/images/brand/4.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/website/assets/images/brand/4.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="single-brand">
-                        <a href="#"><img src="{{ asset('website/assets/images/brand/5.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/website/assets/images/brand/5.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="single-brand">
-                        <a href="#"><img src="{{ asset('website/assets/images/brand/6.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/website/assets/images/brand/6.png') }}" alt=""></a>
                     </div>
                 </div>
             </div>
