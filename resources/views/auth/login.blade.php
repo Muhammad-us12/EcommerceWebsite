@@ -1,48 +1,69 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
 
-        <x-validation-errors class="mb-4" />
-
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ $value }}
+@extends('website/includes/master') 
+ @section('content')        
+    <!-- breadcrumb-area start -->
+    <div class="breadcrumb-area bg-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item"><a href="{{ URL::to('/') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Login</li>
+                    </ul>
+                </div>
             </div>
-        @endsession
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+        </div>
+    </div>
+    <!-- breadcrumb-area end -->
+    
+   
+    <!-- content-wraper start -->
+    <div class="content-wraper">
+        <div class="container">
+        <div class="row">
+                <div class="col-lg-7 col-md-12 m-auto">
+                    <div class="login-register-wrapper">
+                        <!-- login-register-tab-list start -->
+                        <div class="login-register-tab-list nav">
+                            <a class="active" data-bs-toggle="tab" href="#lg1">
+                                <h4> login </h4>
+                            </a>
+                            
+                        </div>
+                        <!-- login-register-tab-list end -->
+                        <div class="tab-content">
+                            <div id="lg1" class="tab-pane active">
+                                <div class="login-form-container">
+                                    <div class="login-register-form">
+                                        <form action="{{ route('login') }}" method="post">
+                                            @csrf
+                                            <div class="login-input-box">
+                                                <input type="text" name="email" :value="old('email')" required placeholder="Enter Email">
+                                                <input type="password" type="password" name="password" required placeholder="Password">
+                                            </div>
+                                            <div class="button-box">
+                                                <div class="login-toggle-btn">
+                                                    <input type="checkbox">
+                                                    <label>Remember me</label>
+                                                    @if (Route::has('password.request'))
+                                                    <a href="{{ route('password.request') }}">Forgot Password?</a>
+                                                    @endif
+                                                </div>
+                                                <div class="button-box">
+                                                    <button class="login-btn btn" type="submit"><span>Login</span></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <!-- content-wraper end -->
+    
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+        @endsection

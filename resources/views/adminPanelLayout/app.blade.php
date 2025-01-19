@@ -13,21 +13,21 @@
         <!-- Place favicon.ico in the root directory -->
 
         <!-- CSS here -->
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/magnific-popup.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/themify-icons.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/nice-select.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/flaticon.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/gijgo.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/animate.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/slick.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/slicknav.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/themify-icons.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/nice-select.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/gijgo.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/animate.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/slick.css') }}">
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/slicknav.css') }}">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'">
 
-        <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/style.css') }}">
-        <!-- <link rel="stylesheet" href="{{ asset('public/websiteFrontend/css/responsive.css') }}"> -->
+        <link rel="stylesheet" href="{{ asset('websiteFrontend/css/style.css') }}">
+        <!-- <link rel="stylesheet" href="{{ asset('websiteFrontend/css/responsive.css') }}"> -->
     </head>
 
 <body>

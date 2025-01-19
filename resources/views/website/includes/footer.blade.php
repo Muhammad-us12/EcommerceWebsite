@@ -9,7 +9,7 @@
                             <!-- footer-info-area start -->
                             <div class="footer-info-area">
                                 <div class="footer-logo">
-                                    <a href="#"><img src="{{ asset('public/website/assets/images/logo/logo_footer.png') }}"
+                                    <a href="#"><img src="{{ asset('website/assets/images/logo/logo_footer.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="desc_footer">
@@ -101,7 +101,7 @@
                         </div>
                         <div class="col-lg-6 col-md-5">
                             <div class="payment">
-                                <img src="{{ asset('public/website/assets/images/icon/1.png') }}" alt="">
+                                <img src="{{ asset('website/assets/images/icon/1.png') }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -127,34 +127,34 @@
                                 <div class="product-details-left">
                                     <div class="product-details-images slider-navigation-1">
                                         <div class="lg-image">
-                                            <img src="{{ asset('public/website/assets/images/product/1.jpg') }}"
+                                            <img src="{{ asset('website/assets/images/product/1.jpg') }}"
                                                 alt="product image">
                                         </div>
                                         <div class="lg-image">
-                                            <img src="{{ asset('public/website/assets/images/product/2.jpg') }}"
+                                            <img src="{{ asset('website/assets/images/product/2.jpg') }}"
                                                 alt="product image">
                                         </div>
                                         <div class="lg-image">
-                                            <img src="{{ asset('public/website/assets/images/product/3.jpg') }}"
+                                            <img src="{{ asset('website/assets/images/product/3.jpg') }}"
                                                 alt="product image">
                                         </div>
                                         <div class="lg-image">
-                                            <img src="{{ asset('public/website/assets/images/product/5.jpg') }}"
+                                            <img src="{{ asset('website/assets/images/product/5.jpg') }}"
                                                 alt="product image">
                                         </div>
                                     </div>
                                     <div class="product-details-thumbs slider-thumbs-1">
                                         <div class="sm-image"><img
-                                                src="{{ asset('public/website/assets/images/product/1.jpg') }}"
+                                                src="{{ asset('website/assets/images/product/1.jpg') }}"
                                                 alt="product image thumb"></div>
                                         <div class="sm-image"><img
-                                                src="{{ asset('public/website/assets/images/product/2.jpg') }}"
+                                                src="{{ asset('website/assets/images/product/2.jpg') }}"
                                                 alt="product image thumb"></div>
                                         <div class="sm-image"><img
-                                                src="{{ asset('public/website/assets/images/product/3.jpg') }}"
+                                                src="{{ asset('website/assets/images/product/3.jpg') }}"
                                                 alt="product image thumb"></div>
                                         <div class="sm-image"><img
-                                                src="{{ asset('public/website/assets/images/product/4.jpg') }}"
+                                                src="{{ asset('website/assets/images/product/4.jpg') }}"
                                                 alt="product image thumb"></div>
                                     </div>
                                 </div>
@@ -223,18 +223,18 @@
 ============================================ -->
 
     <!-- jQuery JS -->
-    <script src="{{ asset('public/website/assets/js/vendor/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('public/website/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
+    <script src="{{ asset('website/assets/js/vendor/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('website/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
     <!-- Popper JS -->
-    <script src="{{ asset('public/website/assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('website/assets/js/popper.min.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="{{ asset('public/website/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('website/assets/js/bootstrap.min.js') }}"></script>
     <!-- Plugins JS -->
-    <script src="{{ asset('public/website/assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('website/assets/js/plugins.js') }}"></script>
     <!-- Ajax Mail -->
-    <script src="{{ asset('public/website/assets/js/ajax-mail.js') }}"></script>
+    <script src="{{ asset('website/assets/js/ajax-mail.js') }}"></script>
     <!-- Main JS -->
-    <script src="{{ asset('public/website/assets/js/main.js') }}"></script>
+    <script src="{{ asset('website/assets/js/main.js') }}"></script>
 
 </body>
 

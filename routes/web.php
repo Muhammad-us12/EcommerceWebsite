@@ -15,6 +15,8 @@ use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\VendorPercentageController;
+use App\Http\Controllers\VendorSalePercentageController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +55,9 @@ Route::prefix('admin')
             Route::get('/sub-categories', [CategoryController::class, 'getAllSubCategories'])->name('categoryList.list');
             Route::get('/{category}', [CategoryController::class, 'getCategory']);
             Route::get('/{category}/sub-categories', [CategoryController::class, 'fetchSubCategory']);
+            Route::get('categories/{category}/edit-sub-category', [CategoryController::class, 'editSubCategory'])->name('categories.editSubCategory');
+            Route::post('categories/{category}/edit-sub-category', [CategoryController::class, 'updateSubCategory'])->name('categories.update');
+            Route::post('categories/{category}/delete', [CategoryController::class, 'deleteCategory'])->name('category.destroy');
 
             Route::post('/store', [CategoryController::class, 'addCategory']);
             Route::post('/update', [CategoryController::class, 'updateCategory'])->name('category.update');
@@ -65,8 +70,16 @@ Route::prefix('admin')
             Route::post('/store', [LocationController::class, 'addLocation']);
             Route::post('/update', [LocationController::class, 'updateLocation'])->name('location.update');
             Route::get('/delete-check/{id}', [LocationController::class, 'deleteCheck']);
-            Route::delete('/delete/{id}', [LocationController::class, 'destroyLocation'])->name('location.destroy');
+            Route::post('/delete/{id}', [LocationController::class, 'destroyLocation'])->name('location.destroy');
 
+        });
+
+        // Locations
+        Route::prefix('vendor-percentage')->group(function () {
+            Route::get('/', [VendorPercentageController::class, 'index']);
+            Route::get('/{id}', [VendorPercentageController::class, 'getPercentage']);
+            Route::post('/store', [VendorPercentageController::class, 'store']);
+            Route::post('/update', [VendorPercentageController::class, 'update']);
         });
 
         // Brands
@@ -101,7 +114,7 @@ Route::prefix('admin')
             Route::get('/gallery/{media}/delete', [ProductController::class, 'deleteGalleryImage']);
             Route::post('/{product}/gallery', [ProductController::class, 'saveProductGallery']);
             Route::post('/store', [ProductController::class, 'store']);
-            Route::post('/update/{product}', [ProductController::class, 'update']);
+            Route::post('/update/{product}', [ProductController::class, 'update'])->name('product.update');
             Route::post('/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
         });
 
@@ -125,6 +138,8 @@ Route::prefix('admin')
             Route::get('/', [CustomerPaymentRequestController::class, 'allPaymentRequestsList']);
             Route::post('/update-payment-status', [CustomerPaymentRequestController::class, 'update_payment_status']);
         });
+
+        Route::resource('vendorSalePercentages', VendorSalePercentageController::class);
 
     });
 

@@ -156,6 +156,9 @@
             <li>
                 <a href="{{ URL::to('admin/vendor') }}">Vendor</a>
             </li>
+            <li>
+                <a href="{{ URL::to('admin/vendorSalePercentages') }}">Vendor Percentage</a>
+            </li>
         </ul>
     </div>
 </li>

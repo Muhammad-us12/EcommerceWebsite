@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             'subcategory_id' => Category::factory(),
             'brand_id' => Brand::factory(),
             'price' => fake()->numberBetween(100, 500),
+            'rent_for_days' => fake()->numberBetween(1, 30),
             'cost_price' => fake()->numberBetween(50, 200),
             'quantity' => fake()->numberBetween(1, 10),
             'security_deposit' => fake()->numberBetween(100, 300),

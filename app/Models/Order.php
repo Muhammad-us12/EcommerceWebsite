@@ -31,6 +31,11 @@ class Order extends Model
         return $this->hasMany(OrderLineItem::class);
     }
 
+    public function lineItem()
+    {
+        return $this->hasOne(OrderLineItem::class);
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

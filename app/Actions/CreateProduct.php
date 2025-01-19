@@ -15,11 +15,10 @@ class CreateProduct
     /**
      * Delete the given user.
      */
-    public function execute(array $validatedRequest, ProductValidation $requestData): Product
+    public function execute(array $validatedRequest, ProductValidation $requestData, string $productStatus): Product
     {
-        // dd($requestData->toArray());
-
-        return DB::transaction(function () use ($validatedRequest, $requestData) {
+        return DB::transaction(function () use ($validatedRequest, $requestData, $productStatus) {
+            $validatedRequest['status'] = $productStatus;
             $product = Product::create($validatedRequest);
 
             if ($product) {
