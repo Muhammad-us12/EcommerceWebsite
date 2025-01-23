@@ -128,7 +128,7 @@
                         <div class="col-lg-2 col-4">
                             <!-- logo start -->
                             <div class="logo">
-                                <a href="index.html"><img src="{{ asset('public/website/assets/images/logo/logo.png') }}"
+                                <a href="index.html"><img src="{{ asset('public/website/assets/images/logo/logo.jpeg') }}"
                                         alt=""></a>
                             </div>
                             <!-- logo end -->
