@@ -16,25 +16,25 @@ $categories = \App\Models\Category::whereNull('parent_id')->get();
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('website/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/website/assets/images/favicon.ico') }}">
 
     <!-- CSS 
     ========================= -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('website/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/website/assets/css/bootstrap.min.css') }}">
 
     <!-- Font CSS -->
-    <link rel="stylesheet" href="{{ asset('website/assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/website/assets/css/font-awesome.min.css') }}">
 
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="{{ asset('website/assets/css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/website/assets/css/plugins.css') }}">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="{{ asset('website/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/website/assets/css/style.css') }}">
 
     <!-- Modernizer JS -->
-    <script src="{{ asset('website/assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    <script src="{{ asset('public/website/assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
@@ -85,16 +85,16 @@ $categories = \App\Models\Category::whereNull('parent_id')->get();
                                     <li class="language list-inline-item">
                                         <div class="btn-group">
                                             <button class="dropdown-toggle"><img
-                                                    src="{{ asset('website/assets/images/icon/la-1.jpg') }}" alt="">
+                                                    src="{{ asset('public/website/assets/images/icon/la-1.jpg') }}" alt="">
                                                 English <i class="fa fa-angle-down"></i></button>
                                             <div class="dropdown-menu">
                                                 <ul>
                                                     <li><a href="#"><img
-                                                                src="{{ asset('website/assets/images/icon/la-1.jpg') }}"
+                                                                src="{{ asset('public/website/assets/images/icon/la-1.jpg') }}"
                                                                 alt="">
                                                             English</a></li>
                                                     <li><a href="#"><img
-                                                                src="{{ asset('website/assets/images/icon/la-2.jpg') }}"
+                                                                src="{{ asset('public/website/assets/images/icon/la-2.jpg') }}"
                                                                 alt="">
                                                             Français</a></li>
                                                 </ul>
@@ -133,11 +133,7 @@ $categories = \App\Models\Category::whereNull('parent_id')->get();
                         <div class="col-lg-2 col-4">
                             <!-- logo start -->
                             <div class="logo">
-<<<<<<< HEAD
-                                <a href="index.html"><img src="{{ asset('public/website/assets/images/logo/logo.jpeg') }}"
-=======
-                                <a href="index.html"><img src="{{ asset('website/assets/images/logo/logo.png') }}"
->>>>>>> 4b700c24fef8d3699b16dfd5da6432a611bdd029
+                                <a href="{{ URL::to('/') }}"><img src="{{ asset('public/website/assets/images/logo/logo.jpeg') }}"
                                         alt=""></a>
                             </div>
                             <!-- logo end -->
@@ -192,7 +188,7 @@ $categories = \App\Models\Category::whereNull('parent_id')->get();
                                                     <li class="mini-cart-item">
                                                         <div class="mini-cart-product-img">
                                                             <a href="#"><img
-                                                                    src="{{ asset('website/assets/images/cart/1.jpg') }}"
+                                                                    src="{{ asset('public/website/assets/images/cart/1.jpg') }}"
                                                                     alt=""></a>
                                                             <span class="product-quantity">1x</span>
                                                         </div>
@@ -215,7 +211,7 @@ $categories = \App\Models\Category::whereNull('parent_id')->get();
                                                     <li class="mini-cart-item">
                                                         <div class="mini-cart-product-img">
                                                             <a href="#"><img
-                                                                    src="{{ asset('website/assets/images/cart/3.jpg') }}"
+                                                                    src="{{ asset('public/website/assets/images/cart/3.jpg') }}"
                                                                     alt=""></a>
                                                             <span class="product-quantity">1x</span>
                                                         </div>
