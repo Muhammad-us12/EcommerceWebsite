@@ -2,10 +2,10 @@
          @extends('adminPanel/master') 
          @section('style')
             <!-- Quill css -->
-            <link href="{{ asset('adminPanel/assets/css/vendor/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('public/adminPanel/assets/css/vendor/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
 
-            <link href="{{ asset('adminPanel/assets/css/vendor/quill.core.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('adminPanel/assets/css/vendor/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('public/adminPanel/assets/css/vendor/quill.core.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('public/adminPanel/assets/css/vendor/quill.snow.css') }}" rel="stylesheet" type="text/css" />
          @endsection  
          @section('content')        
                     <!-- Start Content-->

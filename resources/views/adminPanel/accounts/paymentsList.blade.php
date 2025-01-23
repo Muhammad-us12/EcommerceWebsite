@@ -1,6 +1,6 @@
 @extends('adminPanel/master')
 @section('style')
-<link href="{{ asset('adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
 <!-- Select2 css -->
 <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 @endsection
@@ -167,8 +167,8 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('adminPanel/assets/js/vendor/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('adminPanel/assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('public/adminPanel/assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/adminPanel/assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
 <script src="assets/vendor/select2/js/select2.min.js"></script>
 
 <script>
