@@ -12,11 +12,33 @@ class WebsiteController extends Controller
     public function index()
     {
         $sliders = Slider::all();
-        $categoriesWithProducts = Category::with(['products' => function ($query) {
+        $categoriesWithProducts = Category::whereNull('parent_id')->with(['products' => function ($query) {
             $query->latest()->take(4);
         }])->get();
 
         return view('website.index', compact('sliders', 'categoriesWithProducts'));
+    }
+
+    public function categoryProducts(Category $category)
+    {
+        $categories = Category::with('children')->whereNull('parent_id')->get();
+
+        $products = Product::where('category_id', $category->id)
+            ->where('display_on_website', 1)
+            ->orderBy('id', 'desc')->paginate(20);
+
+        return view('website.productsWithCategory', compact('products', 'category', 'categories'));
+    }
+
+    public function subCategoryProducts(Category $category)
+    {
+        $categories = Category::with('children')->whereNull('parent_id')->get();
+
+        $products = Product::where('subcategory_id', $category->id)
+            ->where('display_on_website', 1)
+            ->orderBy('id', 'desc')->paginate(20);
+
+        return view('website.productsWithCategory', compact('products', 'category', 'categories'));
     }
 
     public function registerVendor()

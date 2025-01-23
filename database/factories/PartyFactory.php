@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Customer;
+use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,19 +11,15 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PartyFactory extends Factory
 {
-
     public function definition(): array
     {
         $openingBalance = fake()->randomNumber(3);
+
         return [
-            'name' => fake()->name,
-            'type' => fake()->randomElements(['Marka', 'Driver', 'Customer'])[0],
+            'partyable_id' => fake()->randomNumber(),
+            'partyable_type' => fake()->randomElements([Customer::class, Vendor::class])[0],
             'opening_balance' => $openingBalance,
             'balance' => $openingBalance,
-            'email' => fake()->email(),
-            'company_name' => fake()->company(),
-            'address' => fake()->address(),
-            'user_id' => fake()->randomNumber(1),
         ];
     }
 }

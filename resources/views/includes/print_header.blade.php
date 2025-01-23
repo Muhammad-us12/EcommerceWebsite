@@ -11,7 +11,7 @@
 <body>
 	<section style="text-align: center;">
 		
-    <img src="{{ asset('public/adminPanel/assets/images/logo.png') }}" alt="" style="width: 220px;margin-bottom:-4rem;">
+    <img src="{{ asset('adminPanel/assets/images/logo.png') }}" alt="" style="width: 220px;margin-bottom:-4rem;">
 
 
         

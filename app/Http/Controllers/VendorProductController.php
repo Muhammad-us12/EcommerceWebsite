@@ -2,9 +2,148 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateProduct;
+use App\Actions\UpdateProduct;
+use App\Enums\Status;
+use App\Enums\UserRoles;
+use App\Http\Requests\ProductUpdateValidation;
+use App\Http\Requests\ProductValidation;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\ExtraPrices;
+use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class VendorProductController extends Controller
 {
-    //
+    public function index()
+    {
+        $products = Product::where('user_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        $view = 'vendorPanel.product.index';
+
+        $categories = Category::whereNull('parent_id')->get();
+        $brands = Brand::all();
+        $productAttributes = ProductAttribute::all();
+        $extraPrices = ExtraPrices::all();
+        $role = Auth::user()->role;
+
+        return view($view, compact('products', 'categories', 'brands', 'productAttributes', 'role', 'extraPrices'));
+    }
+
+    public function create()
+    {
+        return view('products.create');
+    }
+
+    public function store(ProductValidation $request, CreateProduct $createProduct)
+    {
+        $validatedData = $request->validated();
+
+        $validatedData['user_id'] = Auth::id();
+        $product = $createProduct->execute($validatedData, $request, Status::PENDING->value);
+
+        if ($product) {
+            return redirect()->back()->with('success', 'Product Added Successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something Went Wrong Try Again');
+        }
+    }
+
+    public function saveProductGallery(Product $product, Request $request)
+    {
+        $request->validate([
+            'gallery.*' => ['required', 'mimes:jpeg,jpg,png,gif|max:10244'],
+        ]);
+
+        if (isset($request->gallery) && ! empty($request->gallery)) {
+            foreach ($request->gallery as $gallery) {
+                $product->addMedia($gallery)->toMediaCollection('gallery');
+            }
+        }
+
+        if ($product) {
+            return redirect()->back()->with(['success' => 'Product gallery Added Successfully']);
+        } else {
+            return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
+        }
+    }
+
+    public function getGallery(Product $product)
+    {
+        $productGalley = $product->getMedia('gallery');
+
+        return view('adminPanel.product.gallery', compact('productGalley', 'product'));
+    }
+
+    public function deleteGalleryImage(Media $media)
+    {
+        if ($media) {
+            $media->delete();
+
+            return redirect()->back()->with(['success' => 'Image Deleted Successfully']);
+        }
+
+        return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
+
+    }
+
+    public function show(Product $product)
+    {
+        return view('product.edit', compact('product'));
+    }
+
+    public function edit(Product $product)
+    {
+        if ($product->user_id != Auth::id()) {
+            abort(401, 'Unauthorized');
+        }
+
+        $categories = Category::whereNull('parent_id')->get();
+        $subCategories = Category::where('parent_id', $product->category_id)->get();
+        $brands = Brand::all();
+        $productAttributes = ProductAttribute::all();
+        $extraPrices = ExtraPrices::all();
+        $vendors = User::where('role', UserRoles::VENDOR)->get();
+
+        return view('vendorPanel.product.edit', compact('product', 'categories', 'subCategories', 'brands', 'productAttributes', 'vendors', 'extraPrices'));
+    }
+
+    public function update(Product $product, ProductUpdateValidation $request, UpdateProduct $updateProduct)
+    {
+        if ($product->user_id != Auth::id()) {
+            abort(401, 'Unauthorized');
+        }
+
+        $validatedRequest = $request->validated();
+
+        if (isset($validatedRequest['status']) &&
+         $validatedRequest['status'] == Status::IN_REVIEW->value &&
+          $product->status == Status::REJECTED->value &&
+          $product->status == Status::ACTIVE->value
+        ) {
+            return redirect()->back()->with(['error' => 'You can not change this status']);
+        }
+
+        $updateProduct->execute($product, $validatedRequest, $request);
+
+        if ($product) {
+            return redirect()->back()->with(['success' => 'Product Updated Successfully']);
+        } else {
+            return redirect()->back()->with(['error' => 'Something Went Wrong Try Again']);
+        }
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+    }
 }

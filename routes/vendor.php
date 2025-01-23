@@ -1,10 +1,11 @@
 <?php
 
 use App\Enums\UserRoles;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\VendorOnBoardingController;
 use App\Http\Controllers\VendorOrderController;
+use App\Http\Controllers\VendorProductController;
 use Illuminate\Support\Facades\Route;
 
 // Routes for users with 'user' role
@@ -27,13 +28,18 @@ Route::prefix('vendor')
 
         // Product
         Route::prefix('product')->group(function () {
-            Route::get('/', [ProductController::class, 'index'])->name('product.index');
-            Route::get('/{product}', [ProductController::class, 'show']);
-            Route::get('/{product}/gallery', [ProductController::class, 'getGallery']);
-            Route::post('/{product}/gallery', [ProductController::class, 'saveProductGallery']);
-            Route::post('/store', [ProductController::class, 'store']);
-            Route::post('/update', [ProductController::class, 'update']);
-            Route::post('/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
+            Route::get('/', [VendorProductController::class, 'index'])->name('product.index');
+            Route::get('/{product}', [VendorProductController::class, 'edit']);
+            Route::get('/{product}/gallery', [VendorProductController::class, 'getGallery']);
+            Route::post('/{product}/gallery', [VendorProductController::class, 'saveProductGallery']);
+            Route::post('/store', [VendorProductController::class, 'store']);
+            Route::post('/update/{product}', [VendorProductController::class, 'update'])->name('vendor.product.update');
+            Route::post('/destroy', [VendorProductController::class, 'destroy'])->name('product.destroy');
+        });
+
+        // Categories
+        Route::prefix('categories')->group(function () {
+            Route::get('/{category}/sub-categories', [CategoryController::class, 'fetchSubCategory']);
         });
 
         Route::get('/order-list', [VendorOrderController::class, 'index']);

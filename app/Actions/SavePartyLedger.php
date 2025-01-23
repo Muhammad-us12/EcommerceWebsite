@@ -17,7 +17,7 @@ class SavePartyLedger
             "{$paymentFeildName}" => $price,
             'balance' => $party->balance,
             "{$feildName}" => $feildId,
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id ?? 1,
             'remarks' => $remarks,
         ]);
     }

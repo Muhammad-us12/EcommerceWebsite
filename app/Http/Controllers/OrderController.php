@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\MakeOrderAsComplete;
 use App\Enums\OrderStatus;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -28,8 +30,22 @@ class OrderController extends Controller
         ]);
 
         $order = Order::find($request->orderId);
-        $order->update(['status' => $request->status]);
 
-        return redirect()->back()->with('success', 'Order status updated successfully.');
+        try {
+            DB::transaction(function () use ($order, $request) {
+                $order->update(['status' => $request->status]);
+
+                if ($request->status == OrderStatus::COMPLETE->value) {
+                    $makeOrderAsComplete = app(MakeOrderAsComplete::class);
+                    $makeOrderAsComplete->execute($order);
+                }
+            });
+
+            return redirect()->back()->with('success', 'Order status updated successfully.');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update order status.');
+        }
+
     }
 }

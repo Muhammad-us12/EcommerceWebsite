@@ -23,10 +23,13 @@ class ProductController extends Controller
     {
         if (Auth::user()->role == UserRoles::ADMIN->value) {
             $products = Product::orderBy('id', 'desc')->paginate(10);
+            $view = 'adminPanel.product.index';
         } else {
             $products = Product::where('user_id', Auth::user()->id)
                 ->orderBy('id', 'desc')
                 ->paginate(10);
+
+            $view = 'vendorPanel.product.index';
         }
 
         $categories = Category::whereNull('parent_id')->get();
@@ -36,7 +39,7 @@ class ProductController extends Controller
         $extraPrices = ExtraPrices::all();
         $role = Auth::user()->role;
 
-        return view('adminPanel.product.index', compact('products', 'categories', 'brands', 'productAttributes', 'vendors', 'role', 'extraPrices'));
+        return view($view, compact('products', 'categories', 'brands', 'productAttributes', 'vendors', 'role', 'extraPrices'));
     }
 
     public function create()
@@ -109,9 +112,10 @@ class ProductController extends Controller
         $subCategories = Category::where('parent_id', $product->category_id)->get();
         $brands = Brand::all();
         $productAttributes = ProductAttribute::all();
+        $extraPrices = ExtraPrices::all();
         $vendors = User::where('role', UserRoles::VENDOR)->get();
 
-        return view('adminPanel.product.edit', compact('product', 'categories', 'subCategories', 'brands', 'productAttributes', 'vendors'));
+        return view('adminPanel.product.edit', compact('product', 'categories', 'subCategories', 'brands', 'productAttributes', 'vendors', 'extraPrices'));
     }
 
     public function update(Product $product, ProductUpdateValidation $request, UpdateProduct $updateProduct)

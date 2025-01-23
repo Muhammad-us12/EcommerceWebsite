@@ -92,20 +92,34 @@
                                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                                 <script>
                                     // Initialize Flatpickr as a range picker
+
+                                    var rentForDays = {{ $product->rent_for_days }};
+                                    rentForDays = parseInt(rentForDays);
                                     flatpickr("#dateRangePicker", {
                                         mode: "range", // Enable range selection
                                         dateFormat: "Y-m-d", // Format for selected dates
-                                        defaultDate: ["2024-01-01", "2024-01-07"], // Optional default range
                                         minDate: "{{ $currentDate }}", // Minimum selectable date
                                         maxDate: "{{ $dateAfter12Months }}", // Maximum selectable date
                                         disable: [
-                                    "2024-01-03", // Disable specific dates
-                                    "2024-01-05"],
-                                        onChange: function(selectedDates) {
-                                            if (selectedDates.length === 2) {
+                                            "2024-01-03", // Disable specific dates
+                                            "2024-01-05"
+                                        ],
+                                        onChange: function(selectedDates, dateStr, instance) {
+                                            if (selectedDates.length === 1) {
+                                                // If only the start date is selected, automatically select the next 3 days
+                                                const startDate = selectedDates[0];
+                                                const endDate = new Date(startDate);
+                                                endDate.setDate(startDate.getDate() + rentForDays); // Add 2 days to make it a 3-day range
+                                                instance.setDate([startDate, endDate], true);
+                                            } else if (selectedDates.length > rentForDays) {
+                                                // If more than 3 days are selected, reset to the first 3 days
+                                                const startDate = selectedDates[0];
+                                                const endDate = new Date(startDate);
+                                                endDate.setDate(startDate.getDate() + 2); // Add 2 days to make it a 3-day range
+                                                instance.setDate([startDate, endDate], true);
                                             }
                                         },
-                                    });
+        });
                                 </script>
                               <i class="fa fa-check"></i> In stock
                             </div>

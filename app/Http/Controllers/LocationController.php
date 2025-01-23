@@ -70,12 +70,7 @@ class LocationController extends Controller
     {
         $locationId = (int) $id;
         Location::destroy($locationId);
-        // return response()->json(['message' => 'Location deleted successfully']);
-        session()->flash('success', 'Location deleted successfully');
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Location deleted successfully',
-        ]);
+        return redirect()->back()->with(['success' => 'Location Deleted Successfully']);
     }
 }

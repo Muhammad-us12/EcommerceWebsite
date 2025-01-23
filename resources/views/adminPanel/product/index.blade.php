@@ -1,7 +1,9 @@
 
+<?php
+?>
 @extends('adminPanel/master') 
         @section('style')
-        <link href="{{ asset('public/adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
         @endsection
 
         @section('sidebare')
@@ -82,7 +84,7 @@
                                     <div class="page-title-right">
                                         
                                     </div>
-                                    <h4 class="page-title">Slider</h4>
+                                    <h4 class="page-title">Product</h4>
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
                                             <ul>
@@ -135,13 +137,48 @@
                                         <h6>Category: {{ $product->category->name }}</h6>
                                         <h6>Sub Category: {{ $product->subCategory->name }}</h6>
                                         <h6>Brand: {{ $product->brand->name }}</h6>
+                                        <h6>Size: {{ $product->size }}</h6>
                                     </td>
                                     <td>{{ $product->cost_price }}</td>
                                     <td>{{ $product->security_deposit }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        <h6>Price: {{ $product->price }}</h6> 
+                                        <h6>Days: {{ $product->rent_for_days }}</h6> 
+                                    </td>
                                     <td>{{ $product->quantity }}</td>
                                     <td>{{ $product->vendor->name }}</td>
-                                    <td>{{ $product->status }}</td>
+                                    <td>
+                                    <span 
+                                        class="badge 
+                                        <?php
+                                            if ($product->status == \App\Enums\Status::ACTIVE->value) {
+                                                echo 'bg-success';
+                                            }
+if ($product->status == \App\Enums\Status::DISABLED->value) {
+    echo 'bg-danger';
+}
+
+if ($product->status == \App\Enums\Status::PENDING->value) {
+    echo 'bg-secondary';
+}
+
+if ($product->status == \App\Enums\Status::SUBMIT_FOR_APPROVAL->value) {
+    echo 'bg-primary';
+}
+
+if ($product->status == \App\Enums\Status::IN_REVIEW->value) {
+    echo 'bg-info';
+}
+
+if ($product->status == \App\Enums\Status::REJECTED->value) {
+    echo 'bg-warning';
+}
+?>
+                                        "
+                                    
+                                    >{{ $product->status  }}
+                                                                </span>   
+                                    </td>
                                     <td>
                                     <a href="{{ URL::to('admin/product/'.$product->id.'/gallery') }}" class="btn btn-success">Gallery</a>
                                     <a href="{{ URL::to('admin/product/'.$product->id) }}" class="btn btn-info">View</a>
@@ -218,7 +255,33 @@
                                     @enderror
                                 </div>
                             </div>
-                           
+
+                            <div class="col-sm-3">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Rent Days</label>
+                                    <input type="number" id="rent_for_days" name="rent_for_days" min="1" required class="form-control">
+                                    @error('rent_for_days')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="mb-3">
+                                    <label for="example-input-normal" class="form-label">Size</label>
+                                    <select class="form-select" name=="size" required id="example-select">
+                                    <option value="{{ App\Enums\ProductSize::X_SMALL->value }}">X Small</option>
+                                    <option value="{{ App\Enums\ProductSize::SMALL->value }}">Small</option>
+                                    <option value="{{ App\Enums\ProductSize::MEDIUM->value }}">Medium</option>
+                                    <option value="{{ App\Enums\ProductSize::LARGE->value }}">Large</option>
+                                    <option value="{{ App\Enums\ProductSize::X_LARGE->value }}">X Large</option>
+                                    </select>
+                                    @error('size')
+                                    <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                         
+                            
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="example-input-normal" class="form-label">Select Brand</label>
@@ -232,16 +295,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="mb-3">
-                                    <label for="example-input-normal" class="form-label">Qty</label>
-                                    <input type="number" step="any" id="quantity" name="quantity" required class="form-control">
-                                    @error('quantity')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="example-input-normal" class="form-label">Security Deposit</label>
                                     <input type="number" step="any" id="security_deposit" name="security_deposit" required class="form-control">
@@ -436,8 +490,8 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/adminPanel/assets/js/vendor/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('public/adminPanel/assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('adminPanel/assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('adminPanel/assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

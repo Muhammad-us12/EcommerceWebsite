@@ -1,7 +1,7 @@
 
 @extends('adminPanel/master') 
         @section('style')
-        <link href="{{ asset('public/adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('adminPanel/assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
         @endsection
 
         @section('sidebare')
@@ -77,7 +77,10 @@
                                             </td>
                                             <td class="table-action">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-standard-modal" data-location-id="{{ $location->id }}" class="action-icon text-success"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                                <a href="javascript:void(0)" class="action-icon text-danger delete-button" data-location-id="{{ $location->id }}"><i class="mdi mdi-delete-outline"></i></a>
+                                                <form action="{{ route('location.destroy',$location->id.'') }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this location?')" class="btn btn-link text-danger p-0 m-0"><i class="mdi mdi-delete"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -165,8 +168,8 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/adminPanel/assets/js/vendor/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('public/adminPanel/assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('adminPanel/assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('adminPanel/assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

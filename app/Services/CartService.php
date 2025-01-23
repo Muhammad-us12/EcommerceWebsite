@@ -43,7 +43,7 @@ class CartService
             $daysDifference = $startDate->diffInDays($endDate);
 
             $discount = 0;
-            $priceForTotalDays = $product->price * $daysDifference;
+            $priceForTotalDays = $product->price;
             $subTotalPrice = $priceForTotalDays + $extraServiceTotal + $product->security_deposit;
             $totalPrice = $subTotalPrice - $discount;
 

@@ -24,6 +24,7 @@ class OrderFactory extends Factory
         return [
             'customer_id' => Customer::factory(),
             'customer_name' => $this->faker->name,
+            'order_number' => $this->faker->unique()->randomNumber(),
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->phoneNumber,
             'order_notes' => $this->faker->sentence,

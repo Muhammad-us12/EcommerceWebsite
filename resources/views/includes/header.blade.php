@@ -12,15 +12,15 @@
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('public/adminPanel/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('adminPanel/assets/images/favicon.ico') }}">
 
         <!-- third party css -->
-        <link href="{{ asset('public/adminPanel/assets/css/vendor/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('adminPanel/assets/css/vendor/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
         <!-- third party css end -->
 
         <!-- App css -->
-        <link href="{{ asset('public/adminPanel/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('public/adminPanel/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
+        <link href="{{ asset('adminPanel/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('adminPanel/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">        @yield('style')
         <style>
             .change_user:hover{
@@ -38,22 +38,22 @@
                 <!-- LOGO -->
                 <a href="{{ URL::to('/dashboard') }}" style="font-size: 1.3rem;color: wheat;" class="logo text-center logo-light">
                     <!--<span class="logo-lg">-->
-                    <!--    <img src="{{ asset('public/adminPanel/assets/images/logo.png') }}" alt="" style="width:180px;">-->
+                    <!--    <img src="{{ asset('adminPanel/assets/images/logo.png') }}" alt="" style="width:180px;">-->
                     <!--</span>-->
                     
                     Ecommerce Website
                     <span class="logo-sm">
-                        <img src="{{ asset('public/adminPanel/assets/images/logo_sm.png') }}" alt="" height="16">
+                        <img src="{{ asset('adminPanel/assets/images/logo_sm.png') }}" alt="" height="16">
                     </span>
                 </a>
 
                 <!-- LOGO -->
                 <a href="{{ URL::to('/dashboard') }}" class="logo text-center logo-dark">
                     <span class="logo-lg">
-                        <img src="{{ asset('public/adminPanel/assets/images/logo-dark.png') }}" alt="" height="16">
+                        <img src="{{ asset('adminPanel/assets/images/logo-dark.png') }}" alt="" height="16">
                     </span>
                     <span class="logo-sm">
-                        <img src="{{ asset('public/adminPanel/assets/images/logo_sm_dark.png') }}" alt="" height="16">
+                        <img src="{{ asset('adminPanel/assets/images/logo_sm_dark.png') }}" alt="" height="16">
                     </span>
                 </a>
     
@@ -194,7 +194,7 @@
                                     <!-- item-->
                         <!--            <a href="javascript:void(0);" class="dropdown-item notify-item">-->
                         <!--                <div class="d-flex">-->
-                        <!--                    <img class="d-flex me-2 rounded-circle" src="{{ asset('public/adminPanel/assets/images/users/avatar-2.jpg') }}" alt="Generic placeholder image" height="32">-->
+                        <!--                    <img class="d-flex me-2 rounded-circle" src="{{ asset('adminPanel/assets/images/users/avatar-2.jpg') }}" alt="Generic placeholder image" height="32">-->
                         <!--                    <div class="w-100">-->
                         <!--                        <h5 class="m-0 font-14">Erwin Brown</h5>-->
                         <!--                        <span class="font-12 mb-0">UI Designer</span>-->
@@ -205,7 +205,7 @@
                                     <!-- item-->
                         <!--            <a href="javascript:void(0);" class="dropdown-item notify-item">-->
                         <!--                <div class="d-flex">-->
-                        <!--                    <img class="d-flex me-2 rounded-circle" src="{{ asset('public/adminPanel/assets/images/users/avatar-5.jpg') }}" alt="Generic placeholder image" height="32">-->
+                        <!--                    <img class="d-flex me-2 rounded-circle" src="{{ asset('adminPanel/assets/images/users/avatar-5.jpg') }}" alt="Generic placeholder image" height="32">-->
                         <!--                    <div class="w-100">-->
                         <!--                        <h5 class="m-0 font-14">Jacob Deo</h5>-->
                         <!--                        <span class="font-12 mb-0">Developer</span>-->

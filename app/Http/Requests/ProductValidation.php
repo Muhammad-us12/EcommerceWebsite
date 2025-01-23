@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ProductSize;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductValidation extends FormRequest
@@ -21,15 +22,18 @@ class ProductValidation extends FormRequest
      */
     public function rules(): array
     {
+        $productSizes = implode(',', array_column(ProductSize::cases(), 'value'));
+
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
+            'size' => ['required', 'string', 'in:'.$productSizes.''],
             'subcategory_id' => ['required', 'integer', 'exists:categories,id'],
             'brand_id' => ['required', 'integer', 'exists:brands,id'],
             'price' => ['required', 'numeric'],
+            'rent_for_days' => ['required', 'integer', 'min:1'],
             'cost_price' => ['required', 'numeric'],
-            'quantity' => ['required', 'numeric'],
             'security_deposit' => ['required', 'numeric'],
             'user_id' => ['nullable', 'string', 'exists:users,id'],
             'thumbnail' => ['required', 'mimes:jpeg,jpg,png,gif|max:10244'],

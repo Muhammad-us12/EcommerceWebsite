@@ -6,7 +6,7 @@
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="{{ asset('public/websiteFrontend/img/footer_logo.png') }}" alt="">
+                                    <img src="{{ asset('websiteFrontend/img/footer_logo.png') }}" alt="">
                                 </a>
                             </div>
                             <p>
@@ -103,37 +103,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>
     <!-- JS here -->
-    <script src="{{ asset('public/websiteFrontend/js/vendor/modernizr-3.5.0.min.js') }}"></script>
-    <!-- <script src="{{ asset('public/websiteFrontend/js/vendor/jquery-1.12.4.min.js') }}"></script> -->
-    <script src="{{ asset('public/websiteFrontend/js/popper.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/ajax-form.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/waypoints.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/scrollIt.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/jquery.scrollUp.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/wow.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/nice-select.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/jquery.slicknav.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/plugins.js') }}"></script>
-    <!-- <script src="{{ asset('public/websiteFrontend/js/gijgo.min.js') }}"></script> -->
-    <script src="{{ asset('public/websiteFrontend/js/slick.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <!-- <script src="{{ asset('websiteFrontend/js/vendor/jquery-1.12.4.min.js') }}"></script> -->
+    <script src="{{ asset('websiteFrontend/js/popper.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/ajax-form.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/scrollIt.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/wow.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/nice-select.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/jquery.slicknav.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/plugins.js') }}"></script>
+    <!-- <script src="{{ asset('websiteFrontend/js/gijgo.min.js') }}"></script> -->
+    <script src="{{ asset('websiteFrontend/js/slick.min.js') }}"></script>
    
 
     
     <!--contact js-->
-    <script src="{{ asset('public/websiteFrontend/js/contact.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/jquery.form.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('public/websiteFrontend/js/mail-script.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/contact.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/jquery.form.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/mail-script.js') }}"></script>
 
 
-    <script src="{{ asset('public/websiteFrontend/js/main.js') }}"></script>
+    <script src="{{ asset('websiteFrontend/js/main.js') }}"></script>
     <script>
         function collision($div1, $div2) {
             var x1 = $div1.offset().left;
