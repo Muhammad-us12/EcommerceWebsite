@@ -27,7 +27,7 @@ return new class extends Migration
             $table->float('quantity')->default(1);
             $table->float('security_deposit');
             $table->string('status')->default('active');
-            $table->boolean('display_on_website')->default('true');
+            $table->boolean('display_on_website')->default(true);
             $table->text('review_remarks')->nullable();
             $table->string('user_id');
             $table->timestamps();
