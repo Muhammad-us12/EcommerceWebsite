@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 // Now make a checkout page for  take customer information about order  and create a  order save order details in order model and order lline items and customer information in seperate model and also wirte test for
 
 Route::get('/', [WebsiteController::class, 'index']);
+Route::get('/products/{category}', [WebsiteController::class, 'categoryProducts']);
+Route::get('/subcategory-products/{category}', [WebsiteController::class, 'subCategoryProducts']);
+
 Route::get('/product-details/{product}', [WebsiteController::class, 'productDetails']);
 Route::get('/register-vendor', [WebsiteController::class, 'registerVendor']);
 

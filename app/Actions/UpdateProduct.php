@@ -66,7 +66,7 @@ class UpdateProduct
 
         // Update extra prices
         $newExtraPrices = [];
-        if (isset($requestData->attributesId)) {
+        if (isset($requestData->price_ids)) {
             foreach ($requestData->price_ids as $index => $priceId) {
                 if ($requestData['price_values'][$index]) {
                     ProductExtraPrice::updateOrCreate(

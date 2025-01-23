@@ -130,8 +130,8 @@
                                 <div class="mb-3">
                                     <label for="example-input-normal" class="form-label">Display On Web</label>
                                     <select name="display_on_website" class="form-control" id="">
-                                        <option value="true" >Yes</option>
-                                        <option value="false">No</option>
+                                        <option value="true" @if($product->display_on_website == 1) selected @endif >Yes</option>
+                                        <option value="false"@if($product->display_on_website == 0 || $product->display_on_website == null) selected @endif >No</option>
                                               </select>
                                     @error('status')
                                     <p class="text-danger mt-2">{{ $message }}</p>

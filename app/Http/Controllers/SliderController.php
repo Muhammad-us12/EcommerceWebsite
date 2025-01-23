@@ -20,7 +20,7 @@ class SliderController extends Controller
             'title1' => 'required',
             'title2' => 'required',
             'shortParagraph' => 'required',
-            'image' => ['required', 'mimes:jpeg,jpg,png,gif,webp', 'max:10244'],
+            'image' => ['required', 'mimes:jpeg,jpg,png,gif,webp', 'max:110244'],
         ]);
 
         $slider = new Slider;

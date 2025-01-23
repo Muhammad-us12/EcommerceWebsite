@@ -1,3 +1,8 @@
+<?php
+
+$categories = \App\Models\Category::whereNull('parent_id')->get();
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -7,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Athnuim</title>
+    <title>Athnim</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -46,8 +51,8 @@
                         <div class="col-lg-8 order-2 order-lg-1">
                             <div class="top-left-wrap">
                                 <ul class="phone-email-wrap">
-                                    <li><i class="fa fa-phone"></i> (08)123 456 7890</li>
-                                    <li><i class="fa fa-envelope-open-o"></i> yourmail@domain.com</li>
+                                    <li><i class="fa fa-phone"></i> 0313-4018470</li>
+                                    <li><i class="fa fa-envelope-open-o"></i> info@athnim.com</li>
                                 </ul>
                                 <ul class="link-top">
                                     <li><a href="#" title="twitter"><i class="fa fa-twitter"></i></a></li>
@@ -65,12 +70,12 @@
                                     <!-- Currency Start -->
                                     <li class="currency list-inline-item">
                                         <div class="btn-group">
-                                            <button class="dropdown-toggle"> USD $ <i
+                                            <button class="dropdown-toggle"> PKR <i
                                                     class="fa fa-angle-down"></i></button>
                                             <div class="dropdown-menu">
                                                 <ul>
                                                     <li><a href="#">Euro €</a></li>
-                                                    <li><a href="#" class="current">USD $</a></li>
+                                                    <li><a href="#" class="current">PKR</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -140,7 +145,12 @@
                                     <ul>
                                       
                                         <li><a href="{{ URL::to('/') }}">Home</a></li>
-                                        <li><a href="{{ URL::to('shop') }}">Shop</a></li>
+                                        @isset($categories)
+                                            @foreach($categories as $category)
+                                            <li><a href="{{ URL::to('products/'.$category->id) }}">{{ $category->name }}</a></li>
+                                            @endforeach
+                                        @endisset
+                                        
                                         <li><a href="{{ URL::to('register-vendor') }}">Become Vendor</a></li>
                                         <li><a href="about.html">About</a></li>
                                         <li><a href="contact-us.html">Contact us</a></li>
